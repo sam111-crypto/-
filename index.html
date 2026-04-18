@@ -37,12 +37,12 @@
   --font-serif: 'Playfair Display', 'Georgia', serif;
   --font-mono:  'JetBrains Mono', monospace;
 
-  --fs-hero:     clamp(2.4rem, 6vw, 6.8rem);
-  --fs-section:  clamp(2.6rem, 5.5vw, 5.5rem);
-  --fs-sub:      clamp(1.3rem, 2.2vw, 2.2rem);
-  --fs-body-lg:  clamp(1.1rem, 1.35vw, 1.35rem);
-  --fs-body:     clamp(1rem, 1.1vw, 1.1rem);
-  --fs-caption:  clamp(0.72rem, 0.85vw, 0.88rem);
+  --fs-hero:     clamp(1.7rem, 8vw, 7.5rem);
+  --fs-section:  clamp(2rem, 5vw, 4.5rem);
+  --fs-sub:      clamp(1.3rem, 3vw, 2.2rem);
+  --fs-body-lg:  clamp(1.1rem, 1.5vw, 1.35rem);
+  --fs-body:     clamp(1rem, 1.2vw, 1.1rem);
+  --fs-caption:  clamp(0.75rem, 1vw, 0.88rem);
   --fs-nav:      0.82rem;
 
   --lh-tight:    0.9;
@@ -59,7 +59,7 @@
   --space-md:   2rem;
   --space-lg:   4rem;
   --space-xl:   8rem;
-  --space-section: clamp(6rem, 12vh, 10rem);
+  --space-section: clamp(4rem, 10vh, 10rem);
 
   --max-width:  1400px;
   --gutter:     clamp(1.5rem, 5vw, 6rem);
@@ -126,24 +126,18 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-family: var(--font-sans);
   font-weight: 700;
   line-height: var(--lh-tight);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding-bottom: 0.15em;
-  margin-bottom: -0.15em;
-  padding-top: 0.15em;
-  margin-top: -0.15em;
+  padding: 0.15em 0;
 }
 
 .t-heading {
   font-family: var(--font-sans);
   font-weight: 600;
   line-height: var(--lh-heading);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding-bottom: 0.15em;
-  margin-bottom: -0.15em;
-  padding-top: 0.15em;
-  margin-top: -0.15em;
+  padding: 0.15em 0;
 }
 
 .t-serif-italic {
@@ -151,10 +145,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-weight: 400;
   font-style: italic;
   text-transform: lowercase;
-  line-height: 0.8;
+  line-height: 1;
   color: var(--color-text-deep);
-  font-size: 1.35em;
-  margin-left: 10%;
+  font-size: 1.25em;
+  margin-left: 8%;
+  padding-right: 0.2em; /* prevent clipping of italic characters */
 }
 
 .t-caption {
@@ -452,6 +447,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   opacity: 0;
   transform: translateY(100%);
   will-change: transform, opacity;
+  padding-right: 0.08em; /* Prevent italic clipping */
+  margin-right: -0.08em;
 }
 
 .hero__line {
@@ -1527,14 +1524,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 @media (max-width: 768px) {
+  .nav { padding: 1.2rem var(--gutter); }
   .nav__links { display: none; }
   .nav__tagline { display: none; }
 
   .hero { flex-direction: column; justify-content: flex-start; min-height: 100svh; }
-  .hero__panel-left { padding: 8rem var(--gutter) 2rem; text-align: left; z-index: var(--z-content); }
+  .hero__panel-left { padding: 7rem var(--gutter) 2rem; text-align: left; z-index: var(--z-content); }
   .hero__content { max-width: 100%; }
   
-  .hero__word { white-space: normal; word-break: break-word; hyphens: auto; }
+  .hero__word { white-space: nowrap; }
+  .t-serif-italic { margin-left: 0; font-size: 1.15em; }
   
   .hero__panel-right {
     position: relative !important;
@@ -1542,7 +1541,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     left: auto !important;
     right: auto !important;
     width: calc(100% - var(--gutter) * 2) !important;
-    height: 45vh !important;
+    aspect-ratio: 3/4 !important;
+    height: auto !important;
+    max-height: 55vh !important;
     margin: 0 auto 3rem !important;
     border-radius: 16px !important;
     border: 1px solid var(--glass-border-subtle) !important;
@@ -1550,31 +1551,40 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     opacity: 1 !important;
   }
   
-  .hero__subtitle { margin-left: 0; margin-right: 0; }
+  .hero__subtitle { margin-left: 0; margin-right: 0; max-width: 100%; }
   .hero__line { margin-left: 0; margin-right: auto; }
 
-  .philosophy__inner { grid-template-columns: 1fr; }
+  .philosophy__inner { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3rem); }
+  .philosophy__text { padding-right: 0; }
+  .philosophy__quote { max-width: 100%; margin-bottom: var(--space-md); }
   .philosophy__visual { aspect-ratio: 4/3; }
 
-  .collections__grid { grid-template-columns: 1fr; gap: var(--space-sm); }
+  .collections__grid { grid-template-columns: 1fr; gap: var(--space-md); }
   .collection-card { aspect-ratio: 4/3; }
 
-  .materials__inner { grid-template-columns: 1fr; }
-  .materials__right { margin-top: var(--space-md); }
-  .materials__list { grid-template-columns: 1fr; }
+  .materials__inner { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3rem); }
+  .materials__title { max-width: 100%; margin-bottom: var(--space-md); }
+  .materials__right { margin-top: var(--space-md); grid-template-columns: 1fr; gap: var(--space-md); }
+  .material-visual:first-child { grid-row: auto; aspect-ratio: 4/3; }
+  .materials__list { grid-template-columns: 1fr; gap: var(--space-md); }
 
-  .piece { grid-template-columns: 1fr; }
+  .piece { grid-template-columns: 1fr; gap: var(--space-md); }
   .piece:nth-child(even) { direction: ltr; }
-  .piece__info { border-radius: 12px; }
+  .piece__info { border-radius: 12px; padding: clamp(1.5rem, 4vw, 2rem); margin-top: -2rem; position: relative; z-index: 10; margin-left: var(--gutter); margin-right: var(--gutter); }
 
-  .showroom__content { margin: 0 var(--gutter); border-radius: 16px; }
+  .showroom__content { margin: 0 var(--gutter); border-radius: 16px; padding: clamp(2rem, 5vw, 3rem); }
 
-  .space__inner { grid-template-columns: 1fr; }
-  .space__visuals { order: -1; }
-  .space__visual:first-child { margin-top: 0; }
+  .space__inner { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3rem); }
+  .space__visuals { order: -1; grid-template-columns: 1fr; gap: var(--space-md); }
+  .space__visual:first-child { margin-top: 0; aspect-ratio: 4/3; }
+  .space__visual:last-child { aspect-ratio: 4/3; }
 
-  .footer__inner { grid-template-columns: 1fr; gap: var(--space-md); }
-  .footer__bottom { flex-direction: column; gap: var(--space-sm); text-align: center; }
+  .cta { padding: clamp(5rem, 12vh, 8rem) 0; }
+  .cta__title { font-size: clamp(2.4rem, 6vw, 3.5rem); }
+
+  .footer__inner { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .footer__col-links { gap: 1rem; }
+  .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
 
   .orb { display: none; }
 }
