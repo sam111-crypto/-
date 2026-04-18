@@ -1632,17 +1632,28 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     --gutter: 1.25rem;
   }
 
-  .nav { padding: 1.2rem var(--gutter); }
-  .nav__links { display: none; }
-  .nav__tagline { display: none; }
-  .nav__hamburger { display: block; }
-
-  /* Overflow safety net — no aggressive word-break */
+  /* ── Global mobile overrides ── */
   .t-display,
   .t-heading {
     overflow-wrap: break-word;
   }
 
+  .t-body-lg {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .t-caption {
+    letter-spacing: 0.15em;
+  }
+
+  /* ── Navigation ── */
+  .nav { padding: 1.2rem var(--gutter); }
+  .nav__links { display: none; }
+  .nav__tagline { display: none; }
+  .nav__hamburger { display: block; }
+
+  /* ── Hero ── */
   .hero__tag { display: none; }
 
   .hero {
@@ -1695,8 +1706,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .hero__subtitle {
     margin-left: 0;
     margin-right: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
     max-width: 32ch;
     color: var(--color-text-soft);
   }
@@ -1706,7 +1715,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     margin-right: auto;
   }
 
-  /* Philosophy */
+  /* ── Philosophy ── */
   .philosophy__inner {
     grid-template-columns: 1fr;
     gap: clamp(2rem, 5vw, 3rem);
@@ -1717,9 +1726,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     margin-bottom: var(--space-md);
     font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
+  .philosophy__body { max-width: 100%; }
   .philosophy__visual { aspect-ratio: 4/3; }
+  .philosophy__glass-badge {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 0.8rem 1rem;
+  }
 
-  /* Collections */
+  /* ── Collections ── */
+  .collections__header {
+    margin-bottom: clamp(2rem, 4vh, 3rem);
+  }
   .collections__grid {
     grid-template-columns: 1fr;
     gap: var(--space-md);
@@ -1728,8 +1747,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .collections__title {
     font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
+  .collection-card__name {
+    font-size: 1.15rem;
+  }
+  .collection-card__desc {
+    font-size: 0.7rem;
+  }
 
-  /* Materials */
+  /* ── Materials ── */
   .materials__inner {
     grid-template-columns: 1fr;
     gap: clamp(2rem, 5vw, 3rem);
@@ -1755,8 +1780,17 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
+  .material-item {
+    padding: 1rem 1.2rem;
+  }
 
-  /* Featured Pieces */
+  /* ── Featured Pieces ── */
+  .featured__header {
+    margin-bottom: clamp(2rem, 4vh, 3rem);
+  }
+  .featured__title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+  }
   .piece {
     grid-template-columns: 1fr;
     gap: var(--space-md);
@@ -1768,11 +1802,18 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     margin-top: -2rem;
     position: relative;
     z-index: 10;
-    margin-left: var(--gutter);
-    margin-right: var(--gutter);
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+  .piece__name {
+    font-size: 1.15rem;
+  }
+  .piece__desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
-  /* Showroom */
+  /* ── Showroom ── */
   .showroom {
     min-height: auto;
     padding: var(--space-section) 0;
@@ -1786,7 +1827,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
 
-  /* Space */
+  /* ── Space ── */
   .space__inner {
     grid-template-columns: 1fr;
     gap: clamp(2rem, 5vw, 3rem);
@@ -1798,17 +1839,17 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
   .space__visual:first-child {
     margin-top: 0;
-    aspect-ratio: 3/4;
+    aspect-ratio: 4/3;
   }
   .space__visual:last-child {
-    aspect-ratio: 3/4;
+    aspect-ratio: 4/3;
   }
   .space__title {
     max-width: 100%;
     font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
 
-  /* CTA */
+  /* ── CTA ── */
   .cta {
     padding: clamp(5rem, 12vh, 8rem) 0;
   }
@@ -1816,11 +1857,23 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     font-size: clamp(1.75rem, 7vw, 3rem);
     max-width: 100%;
   }
+  .cta__body {
+    max-width: 36ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta__btn {
+    padding: 1rem 2.2rem;
+    font-size: 0.75rem;
+  }
 
-  /* Footer */
+  /* ── Footer ── */
   .footer__inner {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-md);
+  }
+  .footer__col-title {
+    margin-bottom: 1rem;
   }
   .footer__col-links { gap: 1rem; }
   .footer__bottom {
