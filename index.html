@@ -2998,7 +2998,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isOpen = false;
   let conversationStarted = false;
-  let chatHistory = [];
+
+  const responses = {
+    'коллекц': 'У нас три авторские линии. «Тишина» — минимальные формы с максимальной выразительностью. «Архитектон» — мебель как структурное высказывание. «Натура» — органика формы, честность материала. Каждая коллекция адаптируется под ваш интерьер.',
+    'материал': 'Мы работаем с массивом дуба трёхлетней выдержки, натуральным камнем — травертином и мрамором, матовым металлом — латунью и чернёной сталью, а также текстилем: льном, шерстью и кашемиром.',
+    'заказ': 'Процесс начинается с диалога: вы рассказываете о пространстве и задаче, мы предлагаем концепцию. Далее — согласование материалов, чертежи и изготовление в нашем цехе. Свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru.',
+    'срок': 'Сроки зависят от сложности: типовые решения — от 4 недель, индивидуальные проекты — от 8 до 12 недель. На каждом этапе вы видите прогресс.',
+    'цен': 'Стоимость рассчитывается индивидуально, исходя из материалов, размеров и сложности. Базовые предметы — от 180 000 ₽, сложные композиции — по запросу. Напишите нам для расчёта.',
+    'доставк': 'Мы доставляем по всей России. Москва и область — бесплатно при заказе от 300 000 ₽. Сборка и установка включены.',
+    'привет': 'Здравствуйте! Рад помочь. Спрашивайте о коллекциях, материалах, процессе заказа или сроках — расскажу подробно.',
+    'здравств': 'Добрый день! Чем могу помочь? Расскажу о наших коллекциях, материалах или процессе создания мебели.',
+  };
+
+  const fallback = 'Благодарю за вопрос. Для подробной консультации свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru. Мы с радостью всё обсудим.';
+
+  function findResponse(text) {
+    const lower = text.toLowerCase();
+    for (const [key, val] of Object.entries(responses)) {
+      if (lower.includes(key)) return val;
+    }
+    return fallback;
+  }
 
   function openPanel() {
     isOpen = true;
@@ -3044,42 +3064,18 @@ document.addEventListener('DOMContentLoaded', () => {
     return el;
   }
 
-  async function sendMessage(text) {
+  function sendMessage(text) {
     if (!text.trim()) return;
     addMessage(text, 'user');
     input.value = '';
 
-    chatHistory.push({ role: 'user', content: text });
-
     const typing = showTyping();
+    const delay = 600 + Math.random() * 800;
 
-    try {
-      // TODO: КОГДА ЗАЛЬЕТЕ СЕРВЕР НА RENDER, ПОМЕНЯЙТЕ ЭТУ ССЫЛКУ НА ВАШУ
-      // Например: 'https://maestro-ai-backend.onrender.com/api/chat'
-      const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-        ? 'http://localhost:10000/api/chat' 
-        : 'https://tea-d7i0skhkh4rs73anbmh0.onrender.com/api/chat'; 
-
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory })
-      });
-      
-      const data = await response.json();
+    setTimeout(() => {
       typing.remove();
-      
-      if (response.ok && data.reply) {
-        addMessage(data.reply, 'ai');
-        chatHistory.push({ role: 'assistant', content: data.reply });
-      } else {
-        addMessage('Прошу прощения, сервис сейчас недоступен. Пожалуйста, свяжитесь с нами по телефону.', 'ai');
-      }
-    } catch (error) {
-      console.error(error);
-      typing.remove();
-      addMessage('Возникла ошибка сети. Пожалуйста, позвоните нам напрямую: +7 495 000 00 00.', 'ai');
-    }
+      addMessage(findResponse(text), 'ai');
+    }, delay);
   }
 
   trigger.addEventListener('click', () => isOpen ? closePanel() : openPanel());
