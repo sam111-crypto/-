@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: maestro-ai-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENROUTER_API_KEY
+        sync: false # Вставите этот ключ вручную в админке Render

@@ -1892,8 +1892,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
    ============================================ */
 .assistant-trigger {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 2.4rem;
+  right: 2.4rem;
   z-index: var(--z-overlay);
   display: flex;
   align-items: center;
@@ -1908,11 +1908,24 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   cursor: pointer;
   transition: box-shadow var(--duration-fast) var(--ease-out),
               background var(--duration-fast) var(--ease-out);
+  animation: assistantBreath 4s ease-in-out infinite;
+}
+
+@keyframes assistantBreath {
+  0%, 100% {
+    box-shadow: var(--glass-shadow), 0 0 0 rgba(250, 247, 242, 0);
+    border-color: var(--glass-border);
+  }
+  50% {
+    box-shadow: var(--glass-shadow-lg), 0 0 20px rgba(250, 247, 242, 0.5);
+    border-color: rgba(255, 255, 255, 0.85);
+  }
 }
 
 .assistant-trigger:hover {
   background: var(--glass-bg-strong);
   box-shadow: var(--glass-shadow-lg);
+  animation-play-state: paused;
 }
 
 .assistant-trigger[aria-expanded="true"] {
@@ -1939,12 +1952,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .assistant-panel {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 2.4rem;
+  right: 2.4rem;
   z-index: var(--z-overlay);
   width: 370px;
   height: 500px;
-  max-height: calc(100dvh - 4rem);
+  max-height: calc(100dvh - 4.8rem);
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -1971,6 +1984,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 @media (prefers-reduced-motion: reduce) {
   .assistant-panel {
     transition: none;
+  }
+  .assistant-trigger {
+    animation: none;
   }
 }
 
@@ -2982,27 +2998,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isOpen = false;
   let conversationStarted = false;
-
-  const responses = {
-    'коллекц': 'У нас три авторские линии. «Тишина» — минимальные формы с максимальной выразительностью. «Архитектон» — мебель как структурное высказывание. «Натура» — органика формы, честность материала. Каждая коллекция адаптируется под ваш интерьер.',
-    'материал': 'Мы работаем с массивом дуба трёхлетней выдержки, натуральным камнем — травертином и мрамором, матовым металлом — латунью и чернёной сталью, а также текстилем: льном, шерстью и кашемиром.',
-    'заказ': 'Процесс начинается с диалога: вы рассказываете о пространстве и задаче, мы предлагаем концепцию. Далее — согласование материалов, чертежи и изготовление в нашем цехе. Свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru.',
-    'срок': 'Сроки зависят от сложности: типовые решения — от 4 недель, индивидуальные проекты — от 8 до 12 недель. На каждом этапе вы видите прогресс.',
-    'цен': 'Стоимость рассчитывается индивидуально, исходя из материалов, размеров и сложности. Базовые предметы — от 180 000 ₽, сложные композиции — по запросу. Напишите нам для расчёта.',
-    'доставк': 'Мы доставляем по всей России. Москва и область — бесплатно при заказе от 300 000 ₽. Сборка и установка включены.',
-    'привет': 'Здравствуйте! Рад помочь. Спрашивайте о коллекциях, материалах, процессе заказа или сроках — расскажу подробно.',
-    'здравств': 'Добрый день! Чем могу помочь? Расскажу о наших коллекциях, материалах или процессе создания мебели.',
-  };
-
-  const fallback = 'Благодарю за вопрос. Для подробной консультации свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru. Мы с радостью всё обсудим.';
-
-  function findResponse(text) {
-    const lower = text.toLowerCase();
-    for (const [key, val] of Object.entries(responses)) {
-      if (lower.includes(key)) return val;
-    }
-    return fallback;
-  }
+  let chatHistory = [];
 
   function openPanel() {
     isOpen = true;
@@ -3048,18 +3044,42 @@ document.addEventListener('DOMContentLoaded', () => {
     return el;
   }
 
-  function sendMessage(text) {
+  async function sendMessage(text) {
     if (!text.trim()) return;
     addMessage(text, 'user');
     input.value = '';
 
-    const typing = showTyping();
-    const delay = 600 + Math.random() * 800;
+    chatHistory.push({ role: 'user', content: text });
 
-    setTimeout(() => {
+    const typing = showTyping();
+
+    try {
+      // TODO: КОГДА ЗАЛЬЕТЕ СЕРВЕР НА RENDER, ПОМЕНЯЙТЕ ЭТУ ССЫЛКУ НА ВАШУ
+      // Например: 'https://maestro-ai-backend.onrender.com/api/chat'
+      const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:10000/api/chat' 
+        : 'https://tea-d7i0skhkh4rs73anbmh0.onrender.com/api/chat'; 
+
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory })
+      });
+      
+      const data = await response.json();
       typing.remove();
-      addMessage(findResponse(text), 'ai');
-    }, delay);
+      
+      if (response.ok && data.reply) {
+        addMessage(data.reply, 'ai');
+        chatHistory.push({ role: 'assistant', content: data.reply });
+      } else {
+        addMessage('Прошу прощения, сервис сейчас недоступен. Пожалуйста, свяжитесь с нами по телефону.', 'ai');
+      }
+    } catch (error) {
+      console.error(error);
+      typing.remove();
+      addMessage('Возникла ошибка сети. Пожалуйста, позвоните нам напрямую: +7 495 000 00 00.', 'ai');
+    }
   }
 
   trigger.addEventListener('click', () => isOpen ? closePanel() : openPanel());
