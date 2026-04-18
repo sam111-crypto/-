@@ -782,8 +782,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .advantages__text {
   position: sticky;
-  top: 150px;
+  top: clamp(100px, 15vh, 150px);
   padding-right: clamp(1rem, 3vw, 4rem);
+  z-index: 10;
 }
 
 .advantages__title {
@@ -802,45 +803,71 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .advantages__list {
   display: flex;
   flex-direction: column;
-}
-
-.advantage-item {
-  padding: 2.5rem 0;
-  border-top: 1px solid rgba(42, 36, 32, 0.1);
   position: relative;
+  /* Extra bottom padding to allow scrolling past the last sticky card safely */
+  padding-bottom: 20vh;
+}
+
+.advantage-card {
+  position: sticky;
+  /* Top spacing increases for each card using nth-child below */
+  top: 150px; 
+  padding-top: 2rem; /* Creates visual gap between stacked cards */
   z-index: 1;
+  /* Will be manipulated by GSAP */
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
-.advantage-item:last-child {
-  border-bottom: 1px solid rgba(42, 36, 32, 0.1);
-}
+.advantage-card:nth-child(1) { top: clamp(100px, 15vh, 150px); z-index: 1; }
+.advantage-card:nth-child(2) { top: calc(clamp(100px, 15vh, 150px) + 20px); z-index: 2; }
+.advantage-card:nth-child(3) { top: calc(clamp(100px, 15vh, 150px) + 40px); z-index: 3; }
+.advantage-card:nth-child(4) { top: calc(clamp(100px, 15vh, 150px) + 60px); z-index: 4; }
 
-.advantage-item__header {
+.advantage-card__glass {
   display: flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  margin-bottom: 1.2rem;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(40px) saturate(1.2);
+  -webkit-backdrop-filter: blur(40px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 24px 60px rgba(42, 36, 32, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
-.advantage-item__number {
-  font-size: 1.25rem;
-  color: var(--color-muted);
+.advantage-card__number {
+  font-size: clamp(3rem, 5vw, 4rem);
+  line-height: 0.8;
+  color: var(--color-accent);
+  opacity: 0.9;
+  flex-shrink: 0;
+  text-shadow: 0 4px 12px rgba(58, 74, 51, 0.15);
 }
 
-.advantage-item__title {
+.advantage-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.advantage-card__title {
   font-family: var(--font-sans);
-  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 500;
   color: var(--color-text-deep);
   letter-spacing: 0.02em;
 }
 
-.advantage-item__desc {
+.advantage-card__desc {
   font-size: var(--fs-body-lg);
   line-height: 1.6;
   color: var(--color-text-soft);
   max-width: 45ch;
-  margin-left: 2.75rem;
 }
 
 /* ============================================
@@ -1846,11 +1873,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     margin-bottom: var(--space-md);
   }
   .advantages__body { max-width: 100%; }
-  .advantage-item {
-    padding: 2rem 0;
+  .advantage-card__glass {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.8rem;
   }
-  .advantage-item__desc {
-    margin-left: 0; /* Reset margin on mobile for better readability */
+  .advantage-card__number {
+    font-size: 2.2rem;
   }
 
   /* ── Collections ── */
@@ -2097,33 +2126,41 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         <p class="advantages__body t-body-lg reveal-up">Наш подход к производству гарантирует бескомпромиссное качество, премиальный сервис и точное соблюдение сроков.</p>
       </div>
       <div class="advantages__list">
-        <div class="advantage-item reveal-up">
-          <div class="advantage-item__header">
-            <span class="advantage-item__number t-serif-italic">01</span>
-            <h3 class="advantage-item__title">Точность исполнения</h3>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">01</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Точность исполнения</h3>
+              <p class="advantage-card__desc">100% соответствие чертежам и задумке. Мы не упрощаем дизайн ради легкости производства.</p>
+            </div>
           </div>
-          <p class="advantage-item__desc">100% соответствие чертежам и задумке. Мы не упрощаем дизайн ради легкости производства.</p>
         </div>
-        <div class="advantage-item reveal-up">
-          <div class="advantage-item__header">
-            <span class="advantage-item__number t-serif-italic">02</span>
-            <h3 class="advantage-item__title">Премиальные материалы</h3>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">02</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Премиальные материалы</h3>
+              <p class="advantage-card__desc">Отборный массив, редкий шпон, архитектурный металл и лучшая мировая фурнитура.</p>
+            </div>
           </div>
-          <p class="advantage-item__desc">Отборный массив, редкий шпон, архитектурный металл и лучшая мировая фурнитура.</p>
         </div>
-        <div class="advantage-item reveal-up">
-          <div class="advantage-item__header">
-            <span class="advantage-item__number t-serif-italic">03</span>
-            <h3 class="advantage-item__title">Прозрачный процесс</h3>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">03</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Прозрачный процесс</h3>
+              <p class="advantage-card__desc">Персональный менеджмент, регулярные отчеты с производства и строгий контроль сроков.</p>
+            </div>
           </div>
-          <p class="advantage-item__desc">Персональный менеджмент, регулярные отчеты с производства и строгий контроль сроков.</p>
         </div>
-        <div class="advantage-item reveal-up">
-          <div class="advantage-item__header">
-            <span class="advantage-item__number t-serif-italic">04</span>
-            <h3 class="advantage-item__title">Монтаж под ключ</h3>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">04</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Монтаж под ключ</h3>
+              <p class="advantage-card__desc">Собственная деликатная служба сборки. Оставляем после себя только идеальную мебель и чистоту.</p>
+            </div>
           </div>
-          <p class="advantage-item__desc">Собственная деликатная служба сборки. Оставляем после себя только идеальную мебель и чистоту.</p>
         </div>
       </div>
     </div>
@@ -2611,6 +2648,27 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTrigger: { trigger: el, start: 'top 88%', once: true }
     });
   });
+
+  /* ---- Stacked Cards Animation (Advantages) ---- */
+  const cards = gsap.utils.toArray('.advantage-card');
+  if (cards.length > 0) {
+    cards.forEach((card, i) => {
+      if (i === cards.length - 1) return; // Skip last card
+
+      gsap.to(card, {
+        scale: 0.9 + (0.02 * i), // Each card scales down slightly differently
+        opacity: 0.4 + (0.1 * i),
+        y: -20 * (cards.length - 1 - i), // Push up slightly to simulate stacking depth
+        ease: "none",
+        scrollTrigger: {
+          trigger: cards[i + 1],
+          start: "top bottom-=10%", // Start animating when the next card comes up
+          end: "top top+=150",      // Finish animating when the next card docks
+          scrub: true,
+        }
+      });
+    });
+  }
 
   /* ---- Reveal: mask ---- */
   gsap.utils.toArray('.reveal-mask').forEach(el => {
