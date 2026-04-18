@@ -538,7 +538,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .hero__tag {
@@ -553,7 +554,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .hero__title-block {
-  margin-bottom: clamp(2rem, 3.5vh, 3.5rem);
+  margin-bottom: clamp(1.5rem, 3vh, 3rem);
 }
 
 .hero__title {
@@ -575,16 +576,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .hero__accent {
-  display: inline-block;
+  display: block;
   font-family: var(--font-serif);
   font-weight: 400;
   font-style: italic;
   text-transform: lowercase;
   font-size: 1.15em;
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   color: var(--color-text-deep);
-  margin-left: 1.2em;
+  margin-top: 0.1em;
   vertical-align: baseline;
   position: relative;
 }
@@ -602,7 +603,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   width: 64px;
   height: 1px;
   background: rgba(42, 36, 32, 0.3);
-  transform-origin: left;
+  transform-origin: center;
   transform: scaleX(0);
   margin-bottom: clamp(1.5rem, 2.5vh, 2.5rem);
 }
@@ -1672,7 +1673,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
   .hero__title {
     font-size: clamp(2.2rem, 10vw, 3.8rem);
-    line-height: 0.96;
+    line-height: 1.05;
     letter-spacing: 0.04em;
   }
 
@@ -1681,7 +1682,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 
   .hero__accent {
-    font-size: 0.85em;
+    font-size: 1.1em;
+    margin-top: 0.1em;
   }
 
   .hero__line {
@@ -1939,8 +1941,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       <div class="hero__title-block">
         <h1 class="hero__title">
           <span class="hero__word" data-char-split>Авторская мебель</span>
-          <br>
-          <span class="hero__word"><span class="hero__accent" data-char-split>на заказ</span></span>
+          <span class="hero__accent" data-char-split>на заказ</span>
         </h1>
       </div>
       <div class="hero__line"></div>
