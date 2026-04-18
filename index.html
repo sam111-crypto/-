@@ -558,10 +558,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .hero__title {
   font-family: var(--font-sans);
-  font-size: clamp(3rem, 6.5vw, 5.8rem);
-  font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: 0.06em;
+  font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-text-deep);
 }
@@ -577,17 +577,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .hero__accent {
   display: inline-block;
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   font-style: italic;
-  text-transform: none;
-  font-size: 0.82em;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  font-size: 1.15em;
+  line-height: 1;
+  letter-spacing: 0.01em;
   color: var(--color-text-deep);
-  margin-left: 0.08em;
+  margin-left: 1.2em;
   vertical-align: baseline;
   position: relative;
-  top: -0.04em;
 }
 
 .hero__char {
@@ -600,20 +599,20 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .hero__line {
-  width: 48px;
+  width: 64px;
   height: 1px;
-  background: var(--color-neutral);
+  background: rgba(42, 36, 32, 0.3);
   transform-origin: left;
   transform: scaleX(0);
   margin-bottom: clamp(1.5rem, 2.5vh, 2.5rem);
 }
 
 .hero__subtitle {
-  max-width: 30ch;
+  max-width: 42ch;
   color: var(--color-text-deep);
   font-size: var(--fs-body-lg);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.5;
   letter-spacing: 0.01em;
   opacity: 0;
   transform: translateY(20px);
@@ -624,24 +623,23 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1.2rem 3.2rem;
+  padding: 1.1rem 2.8rem;
   font-family: var(--font-sans);
-  font-size: var(--fs-caption);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-deep);
   position: relative;
   overflow: hidden;
   border-radius: 100px;
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 36, 32, 0.15);
   opacity: 0;
   transform: translateY(16px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hero__cta::before {
@@ -649,9 +647,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   position: absolute;
   inset: 0;
   background: var(--color-text-deep);
-  border-radius: 100%;
-  transform: translateY(110%);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 100px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
 
@@ -659,24 +658,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .hero__cta > svg {
   position: relative;
   z-index: 2;
-  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 .hero__cta > svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero__cta:hover {
-    transform: scale(1.03);
-    border-color: rgba(42, 36, 32, 0.3);
-    box-shadow: 0 16px 40px rgba(42, 36, 32, 0.15);
+    border-color: var(--color-text-deep);
+    background: transparent;
   }
   .hero__cta:hover::before {
-    transform: translateY(0%);
-    border-radius: 0%;
+    transform: scaleY(1);
   }
   .hero__cta:hover > span,
   .hero__cta:hover > svg {
@@ -1941,16 +1938,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       <p class="hero__tag">Мебель как искусство формы</p>
       <div class="hero__title-block">
         <h1 class="hero__title">
-          <span class="hero__word" data-char-split>Объём,</span>
-          <span class="hero__word" data-char-split>задающий</span>
-          <span class="hero__word"><span class="hero__accent" data-char-split>ритм</span></span>
+          <span class="hero__word" data-char-split>Авторская мебель</span>
+          <br>
+          <span class="hero__word"><span class="hero__accent" data-char-split>на заказ</span></span>
         </h1>
       </div>
       <div class="hero__line"></div>
-      <p class="hero__subtitle">Диалог мастера, материала и&nbsp;пространства</p>
-      <a href="#collections" class="hero__cta">
-        <span>Смотреть коллекции</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hero__subtitle">Для частных и коммерческих интерьеров. От&nbsp;идеи и&nbsp;материалов до&nbsp;точного исполнения в&nbsp;цехе.</p>
+      <a href="#contact" class="hero__cta">
+        <span>Обсудить проект</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </div>
