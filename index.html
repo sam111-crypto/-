@@ -751,101 +751,105 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 /* ============================================
-   SECTION: Philosophy — Glass card
+   SECTION: Advantages — Premium Standards
    ============================================ */
-.philosophy {
+.advantages {
   padding: var(--space-section) 0;
   overflow: hidden;
   position: relative;
 }
 
-.philosophy__orb {
+.advantages__orb {
   top: -10%;
   left: -10%;
   width: 500px;
   height: 500px;
 }
 
-.philosophy__inner {
+.advantages__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 7fr;
   gap: clamp(3rem, 6vw, 6rem);
-  align-items: center;
+  align-items: start;
 }
 
-.philosophy__text { padding-right: clamp(1rem, 3vw, 4rem); }
+.advantages__text {
+  position: sticky;
+  top: 150px;
+  padding-right: clamp(1rem, 3vw, 4rem);
+}
 
-.philosophy__quote {
+.advantages__title {
   font-size: var(--fs-section);
   font-weight: 500;
   margin-bottom: var(--space-lg);
-  max-width: 24ch;
   color: var(--color-text-deep);
   word-wrap: break-word;
 }
 
-.philosophy__body {
+.advantages__body {
   color: var(--color-text-soft);
   max-width: 40ch;
 }
 
-.philosophy__visual {
-  aspect-ratio: 3/4;
+.advantages__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.advantage-card {
+  position: relative;
+}
+
+.advantage-card__glass {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(2rem, 3vw, 3rem);
   border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: var(--glass-shadow-lg);
-}
-
-.philosophy__visual-inner {
-  width: 100%;
-  height: 100%;
-  background:
-    linear-gradient(170deg, var(--color-bg-accent) 0%, var(--color-surface) 30%, var(--color-neutral) 60%, var(--color-muted) 100%),
-    radial-gradient(ellipse at 40% 60%, rgba(196,184,168,0.5) 0%, transparent 70%);
-  position: relative;
-}
-
-.philosophy__visual-inner::before {
-  content: '';
-  position: absolute;
-  top: 15%;
-  left: 10%;
-  width: 80%;
-  height: 70%;
-  background: radial-gradient(ellipse, rgba(255,252,248,0.35) 0%, transparent 70%);
-}
-
-.philosophy__visual-inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 40%);
-}
-
-.philosophy__glass-badge {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  right: 2rem;
-  z-index: var(--z-glass);
-  padding: 1.2rem 1.5rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(24px) saturate(1.1);
   -webkit-backdrop-filter: blur(24px) saturate(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 
-    0 16px 40px rgba(42, 36, 32, 0.08),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    0 16px 40px rgba(42, 36, 32, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), background 0.6s var(--ease-out);
 }
 
-.philosophy__glass-badge p {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-style: italic;
-  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+@media (prefers-reduced-motion: no-preference) {
+  .advantage-card:hover .advantage-card__glass {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      0 24px 48px rgba(42, 36, 32, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.advantage-card__number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 0.8;
+  color: var(--color-accent);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.advantage-card__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
   color: var(--color-text-deep);
+  letter-spacing: 0.02em;
+}
+
+.advantage-card__desc {
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: var(--color-text-soft);
+  max-width: 45ch;
 }
 
 /* ============================================
@@ -1837,23 +1841,27 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     font-size: 0.75rem;
   }
 
-  /* ── Philosophy ── */
-  .philosophy__inner {
+  /* ── Advantages ── */
+  .advantages__inner {
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 5vw, 3rem);
+    gap: clamp(2.5rem, 5vw, 3rem);
   }
-  .philosophy__text { padding-right: 0; }
-  .philosophy__quote {
+  .advantages__text { 
+    position: static;
+    padding-right: 0; 
+  }
+  .advantages__title {
     max-width: 100%;
     margin-bottom: var(--space-md);
   }
-  .philosophy__body { max-width: 100%; }
-  .philosophy__visual { aspect-ratio: 4/3; }
-  .philosophy__glass-badge {
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
-    padding: 0.8rem 1rem;
+  .advantages__body { max-width: 100%; }
+  .advantage-card__glass {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.8rem;
+  }
+  .advantage-card__number {
+    font-size: 2.2rem;
   }
 
   /* ── Collections ── */
@@ -2089,20 +2097,52 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   </div>
 </section>
 
-<!-- ========== PHILOSOPHY ========== -->
-<section class="philosophy" id="philosophy">
-  <div class="orb orb--warm philosophy__orb"></div>
+<!-- ========== ADVANTAGES ========== -->
+<section class="advantages" id="advantages">
+  <div class="orb orb--warm advantages__orb"></div>
   <div class="container">
-    <div class="philosophy__inner">
-      <div class="philosophy__text">
-        <p class="philosophy__tag t-caption reveal-up">Философия</p>
-        <h2 class="philosophy__quote t-heading reveal-text">Пространство начинается <span class="t-serif-italic">с объекта</span></h2>
-        <p class="philosophy__body t-body-lg reveal-up">Мы не проектируем мебель для интерьеров. Мы создаём объекты, вокруг которых рождается пространство — со своей тишиной, ритмом и характером света</p>
+    <div class="advantages__inner">
+      <div class="advantages__text">
+        <p class="advantages__tag t-caption reveal-up">Стандарты</p>
+        <h2 class="advantages__title t-heading reveal-text">Безупречность <span class="t-serif-italic">в каждой детали</span></h2>
+        <p class="advantages__body t-body-lg reveal-up">Наш подход к производству гарантирует бескомпромиссное качество, премиальный сервис и точное соблюдение сроков.</p>
       </div>
-      <div class="philosophy__visual reveal-mask">
-        <div class="philosophy__visual-inner"></div>
-        <div class="philosophy__glass-badge">
-          <p>«Чистая эстетика»</p>
+      <div class="advantages__grid">
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">01</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Точность исполнения</h3>
+              <p class="advantage-card__desc">100% соответствие чертежам и задумке. Мы не упрощаем дизайн ради легкости производства.</p>
+            </div>
+          </div>
+        </div>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">02</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Премиальные материалы</h3>
+              <p class="advantage-card__desc">Отборный массив, редкий шпон, архитектурный металл и лучшая мировая фурнитура.</p>
+            </div>
+          </div>
+        </div>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">03</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Прозрачный процесс</h3>
+              <p class="advantage-card__desc">Персональный менеджмент, регулярные отчеты с производства и строгий контроль сроков.</p>
+            </div>
+          </div>
+        </div>
+        <div class="advantage-card reveal-up">
+          <div class="advantage-card__glass">
+            <span class="advantage-card__number t-serif-italic">04</span>
+            <div class="advantage-card__content">
+              <h3 class="advantage-card__title">Монтаж под ключ</h3>
+              <p class="advantage-card__desc">Собственная деликатная служба сборки. Оставляем после себя только идеальную мебель и чистоту.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
