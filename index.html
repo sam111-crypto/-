@@ -133,18 +133,18 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
    ============================================ */
 .t-display {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 400;
   line-height: var(--lh-tight);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.15em 0;
 }
 
 .t-heading {
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 400;
   line-height: var(--lh-heading);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.15em 0;
 }
@@ -154,8 +154,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-weight: 400;
   font-style: italic;
   text-transform: lowercase;
+  font-size: 1.15em;
   line-height: 1;
+  letter-spacing: 0.02em;
   color: var(--color-text-deep);
+  vertical-align: baseline;
 }
 
 .t-caption {
@@ -169,8 +172,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .t-body-lg {
   font-size: var(--fs-body-lg);
-  line-height: var(--lh-body);
-  font-weight: 300;
+  line-height: 1.65;
+  font-weight: 400;
+  max-width: 45ch;
+  color: var(--color-text-soft);
 }
 
 /* ============================================
@@ -822,11 +827,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   z-index: var(--z-glass);
   padding: 1.2rem 1.5rem;
   border-radius: 12px;
-  background: rgba(250, 247, 242, 0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 4px 16px rgba(42,36,32,0.08);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 16px 40px rgba(42, 36, 32, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 .philosophy__glass-badge p {
@@ -923,7 +930,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 @media (prefers-reduced-motion: no-preference) {
   .collection-card:hover .collection-card__bg {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 }
 
@@ -941,10 +948,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   right: 0;
   z-index: 3;
   padding: clamp(1.2rem, 2.5vw, 2rem);
-  background: rgba(42, 36, 32, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .collection-card__name {
@@ -1154,26 +1162,57 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .piece {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: repeat(12, 1fr);
   align-items: center;
+  gap: 0;
 }
 
-.piece:nth-child(even) { direction: rtl; }
-.piece:nth-child(even) > * { direction: ltr; }
-
 .piece__visual {
+  grid-column: 1 / 8;
+  grid-row: 1;
   aspect-ratio: 4/3;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
   box-shadow: var(--glass-shadow-lg);
+  z-index: 1;
+}
+
+.piece:nth-child(even) .piece__visual {
+  grid-column: 6 / 13;
+}
+
+.piece__info {
+  grid-column: 7 / 13;
+  grid-row: 1;
+  z-index: 10;
+  padding: clamp(2rem, 4vw, 4rem);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 40px rgba(42, 36, 32, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  margin-left: -2rem;
+}
+
+.piece:nth-child(even) .piece__info {
+  grid-column: 1 / 7;
+  margin-left: 0;
+  margin-right: -2rem;
 }
 
 .piece__visual-inner {
   width: 100%;
   height: 100%;
   position: relative;
+  transition: transform 1.2s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .piece:hover .piece__visual-inner {
+    transform: scale(1.05);
+  }
 }
 
 .piece:nth-child(1) .piece__visual-inner {
@@ -1197,15 +1236,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%);
 }
 
-.piece__info {
-  padding: var(--space-md);
-  border-radius: 16px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
 
 .piece__tag { margin-bottom: var(--space-sm); }
 
@@ -1225,20 +1255,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .piece__link {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
   font-family: var(--font-sans);
-  font-size: var(--fs-caption);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-deep);
   position: relative;
   overflow: hidden;
-  padding: 0.6rem 1.4rem;
+  padding: 1.1rem 2.8rem;
   border-radius: 100px;
-  background: rgba(42, 36, 32, 0.06);
-  border: 1px solid rgba(42, 36, 32, 0.1);
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 36, 32, 0.15);
+  transition: border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .piece__link::before {
@@ -1246,9 +1278,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   position: absolute;
   inset: 0;
   background: var(--color-text-deep);
-  border-radius: 100%;
-  transform: translateY(110%);
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 100px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
 
@@ -1256,32 +1289,30 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .piece__link > svg {
   position: relative;
   z-index: 2;
-  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .piece__link:hover {
-    transform: scale(1.03);
-    border-color: rgba(42, 36, 32, 0.3);
-    box-shadow: 0 8px 24px rgba(42, 36, 32, 0.1);
+    border-color: var(--color-text-deep);
+    background: transparent;
   }
   .piece__link:hover::before {
-    transform: translateY(0%);
-    border-radius: 0%;
+    transform: scaleY(1);
   }
   .piece__link:hover > span,
   .piece__link:hover > svg {
     color: var(--color-bg);
   }
   .piece__link:hover > svg {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 }
 
 .piece__link > svg {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 /* ============================================
@@ -1369,15 +1400,31 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .space__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: repeat(12, 1fr);
   align-items: center;
+  gap: 0;
 }
 
 .space__visuals {
+  grid-column: 1 / 8;
+  grid-row: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-sm);
+  z-index: 1;
+}
+
+.space__text {
+  grid-column: 6 / 13;
+  grid-row: 1;
+  z-index: 10;
+  padding: clamp(3rem, 5vw, 5rem);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 40px rgba(42, 36, 32, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
 .space__visual {
@@ -1395,6 +1442,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   width: 100%;
   height: 100%;
   position: relative;
+  transition: transform 1.2s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .space__visual:hover .space__visual-inner {
+    transform: scale(1.05);
+  }
 }
 
 .space__visual:nth-child(1) .space__visual-inner {
@@ -1470,22 +1524,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: inline-flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1.2rem 3.2rem;
+  padding: 1.1rem 2.8rem;
   color: var(--color-text-deep);
   font-family: var(--font-sans);
-  font-size: var(--fs-caption);
-  font-weight: 600;
-  letter-spacing: var(--tracking-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
   border-radius: 100px;
-  background: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 36, 32, 0.15);
+  transition: border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cta__btn::before {
@@ -1493,9 +1546,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   position: absolute;
   inset: 0;
   background: var(--color-text-deep);
-  border-radius: 100%;
-  transform: translateY(110%);
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 100px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
 
@@ -1503,18 +1557,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .cta__btn > svg {
   position: relative;
   z-index: 2;
-  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .cta__btn:hover {
-    transform: scale(1.03);
-    border-color: rgba(42, 36, 32, 0.3);
-    box-shadow: 0 16px 40px rgba(42, 36, 32, 0.15);
+    border-color: var(--color-text-deep);
+    background: transparent;
   }
   .cta__btn:hover::before {
-    transform: translateY(0%);
-    border-radius: 0%;
+    transform: scaleY(1);
   }
   .cta__btn:hover > span,
   .cta__btn:hover > svg {
@@ -1526,9 +1578,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .cta__btn > svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+  width: 15px;
+  height: 15px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
 }
 
 /* ============================================
@@ -1612,11 +1664,38 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   border-top: 1px solid var(--glass-border-subtle);
 }
 
+.footer__credits {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .footer__copy {
   font-size: var(--fs-caption);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+.footer__copy-sep {
+  color: var(--glass-border-subtle);
+  font-size: 0.8rem;
+}
+
+.footer__deerflow {
+  font-family: var(--font-serif);
+  font-size: var(--fs-caption);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: var(--color-text-soft);
+  opacity: 0.7;
+  transition: opacity var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.footer__deerflow:hover {
+  opacity: 1;
+  color: var(--color-text-deep);
 }
 
 .footer__back-top {
@@ -1650,8 +1729,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   opacity: 0;
 }
 
-.reveal-text { clip-path: inset(100% 0 0 0); }
-.reveal-up   { transform: translateY(30px); }
+.reveal-text { transform: translateY(20px); filter: blur(12px); }
+.reveal-up   { transform: translateY(40px); filter: blur(8px); }
 .reveal-mask { clip-path: inset(0 100% 0 0); }
 
 .collection-card,
@@ -1839,8 +1918,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
-  .piece:nth-child(even) { direction: ltr; }
-  .piece__info {
+  .piece__visual, .piece:nth-child(even) .piece__visual {
+    grid-column: 1 / -1;
+  }
+  .piece__info, .piece:nth-child(even) .piece__info {
+    grid-column: 1 / -1;
     border-radius: 12px;
     padding: clamp(1.5rem, 4vw, 2rem);
     margin-top: -2rem;
@@ -1874,12 +1956,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   /* ── Space ── */
   .space__inner {
     grid-template-columns: 1fr;
-    gap: clamp(2rem, 5vw, 3rem);
+    gap: var(--space-md);
   }
   .space__visuals {
     order: -1;
+    grid-column: 1 / -1;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-sm);
+  }
+  .space__text {
+    grid-column: 1 / -1;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    margin-top: -2rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    border-radius: 12px;
   }
   .space__visual:first-child {
     margin-top: 0;
@@ -2025,7 +2116,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     <div class="philosophy__inner">
       <div class="philosophy__text">
         <p class="philosophy__tag t-caption reveal-up">Философия</p>
-        <h2 class="philosophy__quote t-heading reveal-text">Пространство начинается с объекта</h2>
+        <h2 class="philosophy__quote t-heading reveal-text">Пространство начинается <span class="t-serif-italic">с объекта</span></h2>
         <p class="philosophy__body t-body-lg reveal-up">Мы не проектируем мебель для интерьеров. Мы создаём объекты, вокруг которых рождается пространство — со своей тишиной, ритмом и характером света</p>
       </div>
       <div class="philosophy__visual reveal-mask">
@@ -2044,7 +2135,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   <div class="container">
     <div class="collections__header">
       <p class="t-caption reveal-up">Направления</p>
-      <h2 class="collections__title t-heading reveal-text">Коллекции</h2>
+      <h2 class="collections__title t-heading reveal-text">Коллекции <span class="t-serif-italic">вне времени</span></h2>
       <p class="collections__subtitle t-body-lg reveal-up">Три линии — три подхода к диалогу между формой и материалом</p>
     </div>
     <div class="collections__grid">
@@ -2092,7 +2183,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     <div class="materials__inner">
       <div class="materials__left">
         <p class="materials__tag t-caption reveal-up">Мастерство</p>
-        <h2 class="materials__title t-heading reveal-text">Язык материала</h2>
+        <h2 class="materials__title t-heading reveal-text">Язык <span class="t-serif-italic">материала</span></h2>
         <div class="materials__list">
           <div class="material-item reveal-up">
             <p class="material-item__name">Массив дуба</p>
@@ -2133,7 +2224,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   <div class="container">
     <div class="featured__header">
       <p class="t-caption reveal-up">Избранное</p>
-      <h2 class="featured__title t-heading reveal-text">Объекты</h2>
+      <h2 class="featured__title t-heading reveal-text">Объекты <span class="t-serif-italic">искусства</span></h2>
     </div>
     <div class="featured__pieces">
       <article class="piece">
@@ -2176,7 +2267,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   <div class="orb orb--light showroom__orb2"></div>
   <div class="showroom__content">
     <p class="showroom__tag t-caption reveal-up">Индивидуально</p>
-    <h2 class="showroom__title t-display reveal-text">Создано исключительно для вас</h2>
+    <h2 class="showroom__title t-display reveal-text">Создано исключительно <br><span class="t-serif-italic">для вас</span></h2>
     <p class="showroom__body t-body-lg reveal-up">Наша мебель — это не готовые решения со склада. Мы адаптируем объекты под масштаб и характер вашего интерьера. Пропорции, фактуры и оттенки подбираются индивидуально, чтобы стать продолжением вашей архитектуры.</p>
   </div>
 </section>
@@ -2195,7 +2286,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       </div>
       <div class="space__text">
         <p class="space__tag t-caption reveal-up">Архитектура среды</p>
-        <h2 class="space__title t-heading reveal-text">Мебель формирует пространство</h2>
+        <h2 class="space__title t-heading reveal-text">Мебель формирует <span class="t-serif-italic">пространство</span></h2>
         <p class="space__body t-body-lg reveal-up">Один предмет способен изменить пропорции комнаты, направить свет, задать ритм утра. Мы проектируем не вещи — мы проектируем ощущение дома</p>
       </div>
     </div>
@@ -2207,7 +2298,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   <div class="orb orb--warm cta__orb"></div>
   <div class="container">
     <p class="cta__tag t-caption reveal-up">Начать диалог</p>
-    <h2 class="cta__title t-display reveal-text">Создадим пространство вместе</h2>
+    <h2 class="cta__title t-display reveal-text">Создадим пространство <br><span class="t-serif-italic">вместе</span></h2>
     <p class="cta__body t-body-lg reveal-up">Расскажите о вашем проекте — мы подберём решение, точное по форме, материалу и характеру</p>
     <a href="#" class="cta__btn reveal-up">
       <span>Обсудить проект</span>
@@ -2243,7 +2334,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       </div>
     </div>
     <div class="footer__bottom">
-      <p class="footer__copy">&copy; 2025 Маэстро. Все права защищены</p>
+      <div class="footer__credits">
+        <p class="footer__copy">&copy; 2025 Маэстро. Все права защищены</p>
+        <span class="footer__copy-sep">|</span>
+        <a href="https://deerflow.tech" target="_blank" class="footer__deerflow" title="Created By Deerflow">Created by Deerflow</a>
+      </div>
       <a href="#" class="footer__back-top" aria-label="Наверх">
         <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         <span>Наверх</span>
@@ -2484,26 +2579,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---- Reveal: clip-path text ---- */
+  /* ---- Reveal: blur text ---- */
   gsap.utils.toArray('.reveal-text').forEach(el => {
-    gsap.to(el, {
-      clipPath: 'inset(0% 0 0 0)',
+    gsap.fromTo(el, {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 20
+    }, {
       opacity: 1,
-      duration: 1.2,
+      filter: 'blur(0px)',
+      y: 0,
+      duration: 1.4,
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 85%', once: true }
     });
   });
 
-  /* ---- Reveal: translate up ---- */
+  /* ---- Reveal: translate up with blur ---- */
   gsap.utils.toArray('.reveal-up').forEach(el => {
     gsap.fromTo(el, {
       opacity: 0,
-      y: 30
+      y: 40,
+      filter: 'blur(8px)'
     }, {
       opacity: 1,
       y: 0,
-      duration: 1,
+      filter: 'blur(0px)',
+      duration: 1.2,
       ease: 'power3.out',
       scrollTrigger: { trigger: el, start: 'top 88%', once: true }
     });
