@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>МАЭСТРО — Мебель как искусство</title>
+  <meta name="description" content="МАЭСТРО — мебельный бренд, где форма рождается из диалога света, материала и мастерства">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Unbounded:wght@300;400;500;600;700;800;900&display=swap&subset=cyrillic" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-bg:          #FAF7F2;
+  --color-bg-alt:      #F5F0E8;
+  --color-bg-accent:   #E8E0D4;
+  --color-surface:     #EDE7DD;
+  --color-neutral:     #C4B8A8;
+  --color-muted:       #A89B8C;
+  --color-text-soft:   #8A7E6E;
+  --color-text:        #3A342C;
+  --color-text-deep:   #2A2420;
+
+  --glass-bg:          rgba(250, 247, 242, 0.45);
+  --glass-bg-strong:   rgba(250, 247, 242, 0.6);
+  --glass-border:      rgba(255, 255, 255, 0.5);
+  --glass-border-subtle: rgba(255, 255, 255, 0.25);
+  --glass-shadow:      0 8px 32px rgba(42, 36, 32, 0.08), 0 2px 8px rgba(42, 36, 32, 0.04);
+  --glass-shadow-lg:   0 16px 48px rgba(42, 36, 32, 0.12), 0 4px 16px rgba(42, 36, 32, 0.06);
+  --glass-blur:        20px;
+  --glass-blur-strong: 40px;
+
+  --font-sans:  'Unbounded', 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-mono:  'JetBrains Mono', monospace;
+
+  --fs-hero:     clamp(2.4rem, 6vw, 6.8rem);
+  --fs-section:  clamp(2.6rem, 5.5vw, 5.5rem);
+  --fs-sub:      clamp(1.3rem, 2.2vw, 2.2rem);
+  --fs-body-lg:  clamp(1.1rem, 1.35vw, 1.35rem);
+  --fs-body:     clamp(1rem, 1.1vw, 1.1rem);
+  --fs-caption:  clamp(0.72rem, 0.85vw, 0.88rem);
+  --fs-nav:      0.82rem;
+
+  --lh-tight:    0.9;
+  --lh-heading:  1.12;
+  --lh-body:     1.7;
+
+  --tracking-wide:  0.05em;
+  --tracking-nav:   0.2em;
+  --tracking-mono:  0.25em;
+  --tracking-normal: 0.02em;
+
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   2rem;
+  --space-lg:   4rem;
+  --space-xl:   8rem;
+  --space-section: clamp(6rem, 12vh, 10rem);
+
+  --max-width:  1400px;
+  --gutter:     clamp(1.5rem, 5vw, 6rem);
+
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast:   0.4s;
+  --duration-normal: 0.8s;
+  --duration-slow:   1.2s;
+
+  --z-base:    1;
+  --z-content: 10;
+  --z-glass:   20;
+  --z-nav:     100;
+  --z-overlay: 200;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  letter-spacing: var(--tracking-normal);
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+::selection {
+  background: rgba(196, 184, 168, 0.35);
+  color: var(--color-text-deep);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.t-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
+  padding-top: 0.15em;
+  margin-top: -0.15em;
+}
+
+.t-heading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
+  padding-top: 0.15em;
+  margin-top: -0.15em;
+}
+
+.t-serif-italic {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: lowercase;
+  line-height: 0.8;
+  color: var(--color-text-deep);
+  font-size: 1.35em;
+  margin-left: 10%;
+}
+
+.t-caption {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+.t-body-lg {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  font-weight: 300;
+}
+
+/* ============================================
+   LIQUID GLASS SYSTEM
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass--strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.glass--subtle {
+  background: rgba(250, 247, 242, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border-subtle);
+  box-shadow: 0 4px 16px rgba(42, 36, 32, 0.05);
+}
+
+.glass--dark {
+  background: rgba(42, 36, 32, 0.12);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ============================================
+   DECORATIVE ORB SYSTEM (ambient depth)
+   ============================================ */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.orb--warm {
+  background: radial-gradient(circle, rgba(196,184,168,0.4) 0%, rgba(232,224,212,0.15) 50%, transparent 70%);
+}
+
+.orb--light {
+  background: radial-gradient(circle, rgba(245,240,232,0.5) 0%, rgba(237,231,221,0.2) 50%, transparent 70%);
+}
+
+.orb--deep {
+  background: radial-gradient(circle, rgba(168,155,140,0.25) 0%, rgba(196,184,168,0.1) 50%, transparent 70%);
+}
+
+/* ============================================
+   NAVIGATION — Liquid Glass
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  padding: 1.6rem var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(250, 247, 242, 0.15);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: padding var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
+              backdrop-filter var(--duration-fast) var(--ease-out);
+}
+
+.nav.is-scrolled {
+  padding: 0.9rem var(--gutter);
+  background: rgba(250, 247, 242, 0.45);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 32px rgba(42, 36, 32, 0.08);
+}
+
+.nav__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.nav__logo {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-deep);
+  line-height: 1;
+}
+
+.nav__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  line-height: 1;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav__link {
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.5s var(--ease-out);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 0;
+  height: 1px;
+  background: var(--color-text-soft);
+  transition: max-width 0.5s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav__link:hover::after { max-width: 40%; }
+  .nav__link:hover { color: var(--color-text); }
+}
+
+/* ============================================
+   HERO — Architectural Split-Screen
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+  background:
+    radial-gradient(ellipse 80% 60% at 65% 40%, rgba(212,200,184,0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 20% 80%, rgba(237,231,221,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(196,184,168,0.3) 0%, transparent 60%),
+    linear-gradient(160deg, var(--color-bg) 0%, var(--color-bg-alt) 30%, var(--color-bg-accent) 70%, var(--color-surface) 100%);
+  will-change: transform;
+}
+
+.hero__texture {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+}
+
+.hero__orb1 {
+  top: 5%;
+  right: 15%;
+  width: 600px;
+  height: 600px;
+  z-index: 2;
+}
+
+.hero__orb2 {
+  bottom: 10%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  z-index: 2;
+}
+
+.hero__orb3 {
+  top: 30%;
+  left: 40%;
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+}
+
+.hero__light {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70%;
+  height: 80%;
+  z-index: 2;
+  background: radial-gradient(ellipse at center, rgba(255,252,248,0.5) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero__panel-left {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+  padding: 8rem var(--gutter) 4rem;
+  will-change: clip-path;
+}
+
+.hero__panel-right {
+  position: absolute;
+  top: 12vh;
+  right: clamp(1rem, 5vw, 6rem);
+  width: clamp(300px, 35vw, 550px);
+  height: 76vh;
+  z-index: 3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow-lg);
+  border: 1px solid var(--glass-border-subtle);
+  will-change: clip-path;
+}
+
+.hero__content {
+  position: relative;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.hero__tag {
+  display: inline-block;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  padding: 0.5rem 1.2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  box-shadow: 0 2px 8px rgba(42,36,32,0.04);
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 600;
+  margin-bottom: 0;
+  color: var(--color-text-deep);
+}
+
+.hero__word {
+  display: block;
+  overflow: visible;
+  white-space: nowrap;
+  position: relative;
+  z-index: 10;
+}
+
+.hero__char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+  will-change: transform, opacity;
+}
+
+.hero__line {
+  width: 80px;
+  height: 1px;
+  background: var(--color-neutral);
+  transform-origin: left;
+  transform: scaleX(0);
+  margin: var(--space-md) 0;
+}
+
+.hero__subtitle {
+  max-width: 420px;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hero__scroll {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  opacity: 0;
+}
+
+.hero__scroll-line {
+  width: 48px;
+  height: 1px;
+  background: var(--color-neutral);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__scroll-line::after {
+    animation: scrollLine 2.5s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes scrollLine {
+  0%   { left: -100%; }
+  50%  { left: 0; }
+  100% { left: 100%; }
+}
+
+.hero__visual {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__visual-inner {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(145deg,
+      rgba(196,184,168,0.55) 0%,
+      rgba(168,155,140,0.35) 25%,
+      rgba(212,200,184,0.5) 50%,
+      rgba(196,184,168,0.45) 75%,
+      rgba(180,168,152,0.35) 100%
+    ),
+    radial-gradient(ellipse at 30% 40%, rgba(196,184,168,0.7) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(168,155,140,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 20%, rgba(232,224,212,0.6) 0%, transparent 60%),
+    linear-gradient(to bottom, var(--color-bg-accent) 0%, var(--color-neutral) 40%, var(--color-muted) 70%, #B5A898 100%);
+  position: relative;
+}
+
+.hero__visual-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+  z-index: 1;
+}
+
+.hero__visual-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(250,247,242,0.15) 0%, transparent 30%, rgba(250,247,242,0.2) 100%);
+  z-index: 2;
+}
+
+.hero__visual-glass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-glass);
+  padding: clamp(1.2rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
+  background: rgba(250, 247, 242, 0.35);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.hero__visual-glass-title {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  color: var(--color-text-deep);
+}
+
+.hero__visual-glass-meta {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   SECTION: Philosophy — Glass card
+   ============================================ */
+.philosophy {
+  padding: var(--space-section) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.philosophy__orb {
+  top: -10%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+}
+
+.philosophy__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.philosophy__text { padding-right: clamp(1rem, 3vw, 4rem); }
+
+.philosophy__quote {
+  font-size: var(--fs-section);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+  max-width: 24ch;
+  color: var(--color-text-deep);
+  word-wrap: break-word;
+}
+
+.philosophy__body {
+  color: var(--color-text-soft);
+  max-width: 40ch;
+}
+
+.philosophy__visual {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.philosophy__visual-inner {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(170deg, var(--color-bg-accent) 0%, var(--color-surface) 30%, var(--color-neutral) 60%, var(--color-muted) 100%),
+    radial-gradient(ellipse at 40% 60%, rgba(196,184,168,0.5) 0%, transparent 70%);
+  position: relative;
+}
+
+.philosophy__visual-inner::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(255,252,248,0.35) 0%, transparent 70%);
+}
+
+.philosophy__visual-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 40%);
+}
+
+.philosophy__glass-badge {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  right: 2rem;
+  z-index: var(--z-glass);
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(250, 247, 242, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px rgba(42,36,32,0.08);
+}
+
+.philosophy__glass-badge p {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+  color: var(--color-text-deep);
+}
+
+/* ============================================
+   SECTION: Collections — Richer cards
+   ============================================ */
+.collections {
+  padding: var(--space-section) 0;
+  background: var(--color-bg-alt);
+  position: relative;
+  overflow: hidden;
+}
+
+.collections__orb {
+  bottom: -15%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+}
+
+.collections__header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+}
+
+.collections__title {
+  font-size: var(--fs-section);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-deep);
+}
+
+.collections__subtitle {
+  color: var(--color-muted);
+  max-width: 40ch;
+  margin: 0 auto;
+}
+
+.collections__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2vw, 2rem);
+}
+
+.collection-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--glass-shadow);
+  transition: box-shadow var(--duration-fast) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .collection-card:hover {
+    box-shadow: var(--glass-shadow-lg);
+  }
+}
+
+.collection-card__bg {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.collection-card:nth-child(1) .collection-card__bg {
+  background:
+    radial-gradient(ellipse at 40% 30%, rgba(212,200,184,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(168,155,140,0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #D4C8B8 0%, #C4B5A2 30%, #E8DDD0 60%, #C4B8A8 100%);
+}
+
+.collection-card:nth-child(2) .collection-card__bg {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(191,181,165,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(176,165,149,0.3) 0%, transparent 50%),
+    linear-gradient(160deg, #BFB5A5 0%, #AFA598 30%, #DDD5C8 60%, #B0A595 100%);
+}
+
+.collection-card:nth-child(3) .collection-card__bg {
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(200,192,178,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 70%, rgba(174,166,152,0.3) 0%, transparent 50%),
+    linear-gradient(145deg, #C8C0B2 0%, #B8AFA0 30%, #E2DAD0 60%, #AEA698 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .collection-card:hover .collection-card__bg {
+    transform: scale(1.04);
+  }
+}
+
+.collection-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(42,36,32,0.55) 0%, rgba(42,36,32,0.1) 40%, transparent 70%);
+  z-index: 2;
+}
+
+.collection-card__glass {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  background: rgba(42, 36, 32, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.collection-card__name {
+  font-size: var(--fs-sub);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: var(--color-bg);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.collection-card__desc {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.7);
+}
+
+.collection-card__arrow {
+  position: absolute;
+  top: clamp(1.2rem, 2vw, 2rem);
+  right: clamp(1.2rem, 2vw, 2rem);
+  z-index: 4;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-bg);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+  background: rgba(250, 247, 242, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .collection-card:hover .collection-card__arrow {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   SECTION: Materials — Glass accents
+   ============================================ */
+.materials {
+  padding: var(--space-section) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.materials__orb {
+  top: 20%;
+  right: -15%;
+  width: 500px;
+  height: 500px;
+}
+
+.materials__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 5rem);
+}
+
+.materials__tag { margin-bottom: var(--space-md); }
+
+.materials__title {
+  font-size: var(--fs-section);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+  max-width: 14ch;
+  color: var(--color-text-deep);
+}
+
+.materials__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.material-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border-subtle);
+  box-shadow: 0 2px 8px rgba(42,36,32,0.03);
+  transition: box-shadow var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .material-item:hover {
+    box-shadow: var(--glass-shadow);
+    transform: translateY(-2px);
+  }
+}
+
+.material-item__name {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 1.4vw, 1.4rem);
+  margin-bottom: 0.4rem;
+  color: var(--color-text-deep);
+}
+
+.material-item__desc {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.materials__right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.material-visual {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--glass-shadow);
+}
+
+.material-visual:first-child {
+  grid-row: 1 / 3;
+}
+
+.material-visual:not(:first-child) {
+  aspect-ratio: 1;
+}
+
+.material-visual__inner {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  position: relative;
+}
+
+.material-visual:nth-child(1) .material-visual__inner {
+  background:
+    radial-gradient(ellipse at 40% 50%, rgba(181,168,152,0.5) 0%, transparent 60%),
+    linear-gradient(150deg, #B5A898 0%, #C8BAA8 30%, #D4C8B8 60%, #A89888 100%);
+}
+
+.material-visual:nth-child(2) .material-visual__inner {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(200,190,178,0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #C8BEB2 0%, #D8D0C4 50%, #AEA69A 100%);
+}
+
+.material-visual:nth-child(3) .material-visual__inner {
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(208,200,188,0.4) 0%, transparent 60%),
+    linear-gradient(160deg, #D0C8BC 0%, #E0D8D0 50%, #BAB0A4 100%);
+}
+
+.material-visual__inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+}
+
+/* ============================================
+   SECTION: Featured Pieces — Glass info
+   ============================================ */
+.featured {
+  padding: var(--space-section) 0;
+  background: var(--color-bg-alt);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured__orb {
+  top: 10%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+}
+
+.featured__header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+}
+
+.featured__title {
+  font-size: var(--fs-section);
+  font-weight: 500;
+  color: var(--color-text-deep);
+}
+
+.featured__pieces {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 8vh, 8rem);
+}
+
+.piece {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.piece:nth-child(even) { direction: rtl; }
+.piece:nth-child(even) > * { direction: ltr; }
+
+.piece__visual {
+  aspect-ratio: 4/3;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.piece__visual-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.piece:nth-child(1) .piece__visual-inner {
+  background:
+    radial-gradient(ellipse at 45% 45%, rgba(196,184,168,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(168,155,140,0.3) 0%, transparent 50%),
+    linear-gradient(140deg, var(--color-bg-accent) 0%, var(--color-neutral) 40%, var(--color-muted) 70%, var(--color-surface) 100%);
+}
+
+.piece:nth-child(2) .piece__visual-inner {
+  background:
+    radial-gradient(ellipse at 40% 55%, rgba(180,168,152,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 65% 30%, rgba(196,184,168,0.3) 0%, transparent 50%),
+    linear-gradient(160deg, var(--color-surface) 0%, var(--color-bg-accent) 40%, var(--color-neutral) 70%, var(--color-muted) 100%);
+}
+
+.piece__visual-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%);
+}
+
+.piece__info {
+  padding: var(--space-md);
+  border-radius: 16px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.piece__tag { margin-bottom: var(--space-sm); }
+
+.piece__name {
+  font-size: var(--fs-sub);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-deep);
+}
+
+.piece__desc {
+  color: var(--color-text-soft);
+  max-width: 36ch;
+  margin-bottom: var(--space-md);
+}
+
+.piece__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--color-text-deep);
+  position: relative;
+  overflow: hidden;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  background: rgba(42, 36, 32, 0.06);
+  border: 1px solid rgba(42, 36, 32, 0.1);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.piece__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-text-deep);
+  border-radius: 100%;
+  transform: translateY(110%);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+}
+
+.piece__link > span,
+.piece__link > svg {
+  position: relative;
+  z-index: 2;
+  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .piece__link:hover {
+    transform: scale(1.03);
+    border-color: rgba(42, 36, 32, 0.3);
+    box-shadow: 0 8px 24px rgba(42, 36, 32, 0.1);
+  }
+  .piece__link:hover::before {
+    transform: translateY(0%);
+    border-radius: 0%;
+  }
+  .piece__link:hover > span,
+  .piece__link:hover > svg {
+    color: var(--color-bg);
+  }
+  .piece__link:hover > svg {
+    transform: translateX(3px);
+  }
+}
+
+.piece__link > svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+}
+
+/* ============================================
+   SECTION: Showroom — Immersive Glass
+   ============================================ */
+.showroom {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.showroom__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(196,184,168,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(212,200,184,0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(168,155,140,0.15) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--color-bg-accent) 0%, var(--color-surface) 25%, var(--color-bg-alt) 60%, var(--color-bg) 100%);
+}
+
+.showroom__orb1 {
+  top: 10%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+}
+
+.showroom__orb2 {
+  bottom: 15%;
+  left: 5%;
+  width: 400px;
+  height: 400px;
+}
+
+.showroom__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.showroom__content {
+  position: relative;
+  z-index: var(--z-content);
+  text-align: center;
+  max-width: 750px;
+  padding: clamp(3rem, 5vw, 5rem);
+  border-radius: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+.showroom__tag { margin-bottom: var(--space-md); }
+
+.showroom__title {
+  font-size: var(--fs-section);
+  font-weight: 400;
+  margin-bottom: var(--space-md);
+  color: var(--color-text-deep);
+}
+
+.showroom__body {
+  color: var(--color-text-soft);
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SECTION: Space
+   ============================================ */
+.space {
+  padding: var(--space-section) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.space__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.space__visuals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.space__visual {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+}
+
+.space__visual:first-child {
+  margin-top: var(--space-lg);
+}
+
+.space__visual-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.space__visual:nth-child(1) .space__visual-inner {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(196,184,168,0.4) 0%, transparent 60%),
+    linear-gradient(155deg, var(--color-surface) 0%, var(--color-bg-accent) 40%, var(--color-neutral) 80%, var(--color-muted) 100%);
+}
+
+.space__visual:nth-child(2) .space__visual-inner {
+  background:
+    radial-gradient(ellipse at 40% 50%, rgba(212,200,184,0.4) 0%, transparent 60%),
+    linear-gradient(170deg, var(--color-bg-accent) 0%, var(--color-surface) 40%, var(--color-bg-alt) 80%, var(--color-neutral) 100%);
+}
+
+.space__visual-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+
+.space__tag { margin-bottom: var(--space-md); }
+
+.space__title {
+  font-size: var(--fs-section);
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+  max-width: 14ch;
+  color: var(--color-text-deep);
+}
+
+.space__body {
+  color: var(--color-text-soft);
+  max-width: 38ch;
+}
+
+/* ============================================
+   SECTION: CTA — Glass container
+   ============================================ */
+.cta {
+  padding: clamp(8rem, 16vh, 14rem) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta__orb {
+  top: -20%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+}
+
+.cta__tag { margin-bottom: var(--space-md); }
+
+.cta__title {
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: 400;
+  margin-bottom: var(--space-md);
+  max-width: 18ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--color-text-deep);
+}
+
+.cta__body {
+  color: var(--color-text-soft);
+  max-width: 45ch;
+  margin: 0 auto var(--space-lg);
+}
+
+.cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 3.2rem;
+  color: var(--color-text-deep);
+  font-family: var(--font-sans);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  border-radius: 100px;
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-text-deep);
+  border-radius: 100%;
+  transform: translateY(110%);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+}
+
+.cta__btn > span,
+.cta__btn > svg {
+  position: relative;
+  z-index: 2;
+  transition: color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cta__btn:hover {
+    transform: scale(1.03);
+    border-color: rgba(42, 36, 32, 0.3);
+    box-shadow: 0 16px 40px rgba(42, 36, 32, 0.15);
+  }
+  .cta__btn:hover::before {
+    transform: translateY(0%);
+    border-radius: 0%;
+  }
+  .cta__btn:hover > span,
+  .cta__btn:hover > svg {
+    color: var(--color-bg);
+  }
+  .cta__btn:hover > svg {
+    transform: translateX(4px);
+  }
+}
+
+.cta__btn > svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.075s;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: var(--space-lg) 0 var(--space-md);
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.footer__logo {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-deep);
+}
+
+.footer__tagline {
+  color: var(--color-muted);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  max-width: 24ch;
+}
+
+.footer__col-title {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+.footer__col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer__col-link {
+  font-size: var(--fs-body);
+  color: var(--color-text-soft);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.5s var(--ease-out);
+}
+
+.footer__col-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 0;
+  height: 1px;
+  background: var(--color-text-soft);
+  transition: max-width 0.5s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .footer__col-link:hover::after { max-width: 100%; }
+  .footer__col-link:hover { color: var(--color-text); }
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--glass-border-subtle);
+}
+
+.footer__copy {
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.footer__back-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  background: rgba(250,247,242,0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border-subtle);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .footer__back-top:hover { color: var(--color-text); background: var(--glass-bg); }
+}
+
+/* ============================================
+   GSAP ANIMATION STATES
+   ============================================ */
+.reveal-text,
+.reveal-up,
+.reveal-fade,
+.reveal-mask {
+  opacity: 0;
+}
+
+.reveal-text { clip-path: inset(100% 0 0 0); }
+.reveal-up   { transform: translateY(30px); }
+.reveal-mask { clip-path: inset(0 100% 0 0); }
+
+.collection-card,
+.material-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-text, .reveal-up, .reveal-fade, .reveal-mask,
+  .collection-card, .material-item {
+    opacity: 1; transform: none; clip-path: none;
+  }
+  .hero__tag, .hero__subtitle { opacity: 1; transform: none; }
+  .hero__char { opacity: 1; transform: none; }
+  .hero__line { transform: scaleX(1); }
+  .hero__visual-glass { opacity: 1; transform: none; }
+  .hero__panel-left, .hero__panel-right { clip-path: none !important; }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1199px) {
+  .hero__panel-right {
+    width: 40vw;
+    height: 65vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav__links { display: none; }
+  .nav__tagline { display: none; }
+
+  .hero { flex-direction: column; justify-content: flex-start; min-height: 100svh; }
+  .hero__panel-left { padding: 8rem var(--gutter) 2rem; text-align: left; z-index: var(--z-content); }
+  .hero__content { max-width: 100%; }
+  
+  .hero__word { white-space: normal; word-break: break-word; hyphens: auto; }
+  
+  .hero__panel-right {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: calc(100% - var(--gutter) * 2) !important;
+    height: 45vh !important;
+    margin: 0 auto 3rem !important;
+    border-radius: 16px !important;
+    border: 1px solid var(--glass-border-subtle) !important;
+    z-index: 3 !important;
+    opacity: 1 !important;
+  }
+  
+  .hero__subtitle { margin-left: 0; margin-right: 0; }
+  .hero__line { margin-left: 0; margin-right: auto; }
+
+  .philosophy__inner { grid-template-columns: 1fr; }
+  .philosophy__visual { aspect-ratio: 4/3; }
+
+  .collections__grid { grid-template-columns: 1fr; gap: var(--space-sm); }
+  .collection-card { aspect-ratio: 4/3; }
+
+  .materials__inner { grid-template-columns: 1fr; }
+  .materials__right { margin-top: var(--space-md); }
+  .materials__list { grid-template-columns: 1fr; }
+
+  .piece { grid-template-columns: 1fr; }
+  .piece:nth-child(even) { direction: ltr; }
+  .piece__info { border-radius: 12px; }
+
+  .showroom__content { margin: 0 var(--gutter); border-radius: 16px; }
+
+  .space__inner { grid-template-columns: 1fr; }
+  .space__visuals { order: -1; }
+  .space__visual:first-child { margin-top: 0; }
+
+  .footer__inner { grid-template-columns: 1fr; gap: var(--space-md); }
+  .footer__bottom { flex-direction: column; gap: var(--space-sm); text-align: center; }
+
+  .orb { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="nav" role="navigation" aria-label="Основная навигация">
+  <div class="nav__brand">
+    <a href="#" class="nav__logo">Маэстро</a>
+    <span class="nav__tagline">Мебель как искусство формы</span>
+  </div>
+  <ul class="nav__links">
+    <li><a href="#philosophy" class="nav__link">Философия</a></li>
+    <li><a href="#collections" class="nav__link">Коллекции</a></li>
+    <li><a href="#materials" class="nav__link">Материалы</a></li>
+    <li><a href="#showroom" class="nav__link">На заказ</a></li>
+    <li><a href="#contact" class="nav__link">Связаться</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" aria-label="Главный экран">
+  <div class="hero__bg"></div>
+  <div class="hero__texture"></div>
+  <div class="hero__light"></div>
+  <div class="orb orb--warm hero__orb1"></div>
+  <div class="orb orb--light hero__orb2"></div>
+  <div class="orb orb--deep hero__orb3"></div>
+
+  <div class="hero__panel-left">
+    <div class="hero__content">
+      <p class="hero__tag t-caption">Мебель как искусство формы</p>
+    <h1 class="hero__title t-display">
+      <span class="hero__word" data-char-split>Объем,</span>
+      <span class="hero__word" data-char-split>задающий</span>
+      <span class="hero__word t-serif-italic" data-char-split style="display: block; margin-top: 0.1em;">ритм</span>
+    </h1>
+      <div class="hero__line"></div>
+      <p class="hero__subtitle t-body-lg">Каждый предмет — результат диалога между мастером, материалом и пространством, которое он создаёт</p>
+      <!-- Scroll indicator removed per user request -->
+    </div>
+  </div>
+
+  <div class="hero__panel-right">
+    <div class="hero__visual">
+      <div class="hero__visual-inner"></div>
+      <div class="hero__visual-glass">
+        <span class="hero__visual-glass-title">Коллекция «Тишина»</span>
+        <span class="hero__visual-glass-meta hero__counter" data-target="2026" data-start="2021">2021</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PHILOSOPHY ========== -->
+<section class="philosophy" id="philosophy">
+  <div class="orb orb--warm philosophy__orb"></div>
+  <div class="container">
+    <div class="philosophy__inner">
+      <div class="philosophy__text">
+        <p class="philosophy__tag t-caption reveal-up">Философия</p>
+        <h2 class="philosophy__quote t-heading reveal-text">Пространство начинается с объекта</h2>
+        <p class="philosophy__body t-body-lg reveal-up">Мы не проектируем мебель для интерьеров. Мы создаём объекты, вокруг которых рождается пространство — со своей тишиной, ритмом и характером света</p>
+      </div>
+      <div class="philosophy__visual reveal-mask">
+        <div class="philosophy__visual-inner"></div>
+        <div class="philosophy__glass-badge">
+          <p>«Чистая эстетика»</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COLLECTIONS ========== -->
+<section class="collections" id="collections">
+  <div class="orb orb--deep collections__orb"></div>
+  <div class="container">
+    <div class="collections__header">
+      <p class="t-caption reveal-up">Направления</p>
+      <h2 class="collections__title t-heading reveal-text">Коллекции</h2>
+      <p class="collections__subtitle t-body-lg reveal-up">Три линии — три подхода к диалогу между формой и материалом</p>
+    </div>
+    <div class="collections__grid">
+      <div class="collection-card reveal-up">
+        <div class="collection-card__bg"></div>
+        <div class="collection-card__overlay"></div>
+        <div class="collection-card__glass">
+          <h3 class="collection-card__name t-heading">Тишина</h3>
+          <p class="collection-card__desc">Минимальная форма, максимальная выразительность</p>
+        </div>
+        <div class="collection-card__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+      <div class="collection-card reveal-up">
+        <div class="collection-card__bg"></div>
+        <div class="collection-card__overlay"></div>
+        <div class="collection-card__glass">
+          <h3 class="collection-card__name t-heading">Архитектон</h3>
+          <p class="collection-card__desc">Структура как эстетическое высказывание</p>
+        </div>
+        <div class="collection-card__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+      <div class="collection-card reveal-up">
+        <div class="collection-card__bg"></div>
+        <div class="collection-card__overlay"></div>
+        <div class="collection-card__glass">
+          <h3 class="collection-card__name t-heading">Натура</h3>
+          <p class="collection-card__desc">Органика формы, честность материала</p>
+        </div>
+        <div class="collection-card__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MATERIALS ========== -->
+<section class="materials" id="materials">
+  <div class="orb orb--light materials__orb"></div>
+  <div class="container">
+    <div class="materials__inner">
+      <div class="materials__left">
+        <p class="materials__tag t-caption reveal-up">Мастерство</p>
+        <h2 class="materials__title t-heading reveal-text">Язык материала</h2>
+        <div class="materials__list">
+          <div class="material-item reveal-up">
+            <p class="material-item__name">Массив дуба</p>
+            <p class="material-item__desc">Выдержка 3 года</p>
+          </div>
+          <div class="material-item reveal-up">
+            <p class="material-item__name">Натуральный камень</p>
+            <p class="material-item__desc">Травертин, мрамор</p>
+          </div>
+          <div class="material-item reveal-up">
+            <p class="material-item__name">Матовый металл</p>
+            <p class="material-item__desc">Латунь, чернёная сталь</p>
+          </div>
+          <div class="material-item reveal-up">
+            <p class="material-item__name">Текстиль</p>
+            <p class="material-item__desc">Лён, шерсть, кашемир</p>
+          </div>
+        </div>
+      </div>
+      <div class="materials__right">
+        <div class="material-visual reveal-mask">
+          <div class="material-visual__inner"></div>
+        </div>
+        <div class="material-visual reveal-mask">
+          <div class="material-visual__inner"></div>
+        </div>
+        <div class="material-visual reveal-mask">
+          <div class="material-visual__inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURED PIECES ========== -->
+<section class="featured" id="featured">
+  <div class="orb orb--warm featured__orb"></div>
+  <div class="container">
+    <div class="featured__header">
+      <p class="t-caption reveal-up">Избранное</p>
+      <h2 class="featured__title t-heading reveal-text">Объекты</h2>
+    </div>
+    <div class="featured__pieces">
+      <article class="piece">
+        <div class="piece__visual reveal-mask">
+          <div class="piece__visual-inner"></div>
+        </div>
+        <div class="piece__info">
+          <p class="piece__tag t-caption reveal-up">Коллекция «Тишина»</p>
+          <h3 class="piece__name t-heading reveal-text">Кресло «Созерцание»</h3>
+          <p class="piece__desc reveal-up">Форма, рождённая из жеста отдыха. Дуб, лён, ручная сборка. Объект, задающий тон всему пространству</p>
+          <a href="#" class="piece__link reveal-up">
+            <span>Подробнее</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="piece">
+        <div class="piece__visual reveal-mask">
+          <div class="piece__visual-inner"></div>
+        </div>
+        <div class="piece__info">
+          <p class="piece__tag t-caption reveal-up">Коллекция «Архитектон»</p>
+          <h3 class="piece__name t-heading reveal-text">Стол «Горизонт»</h3>
+          <p class="piece__desc reveal-up">Геометрия чистого объёма. Травертин и чернёная сталь. Обеденный стол как архитектурный акцент</p>
+          <a href="#" class="piece__link reveal-up">
+            <span>Подробнее</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SHOWROOM ========== -->
+<section class="showroom" id="showroom">
+  <div class="showroom__bg"></div>
+  <div class="showroom__overlay"></div>
+  <div class="orb orb--warm showroom__orb1"></div>
+  <div class="orb orb--light showroom__orb2"></div>
+  <div class="showroom__content">
+    <p class="showroom__tag t-caption reveal-up">Индивидуально</p>
+    <h2 class="showroom__title t-display reveal-text">Создано исключительно для вас</h2>
+    <p class="showroom__body t-body-lg reveal-up">Наша мебель — это не готовые решения со склада. Мы адаптируем объекты под масштаб и характер вашего интерьера. Пропорции, фактуры и оттенки подбираются индивидуально, чтобы стать продолжением вашей архитектуры.</p>
+  </div>
+</section>
+
+<!-- ========== SPACE ========== -->
+<section class="space" id="space">
+  <div class="container">
+    <div class="space__inner">
+      <div class="space__visuals">
+        <div class="space__visual reveal-mask">
+          <div class="space__visual-inner"></div>
+        </div>
+        <div class="space__visual reveal-mask">
+          <div class="space__visual-inner"></div>
+        </div>
+      </div>
+      <div class="space__text">
+        <p class="space__tag t-caption reveal-up">Архитектура среды</p>
+        <h2 class="space__title t-heading reveal-text">Мебель формирует пространство</h2>
+        <p class="space__body t-body-lg reveal-up">Один предмет способен изменить пропорции комнаты, направить свет, задать ритм утра. Мы проектируем не вещи — мы проектируем ощущение дома</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta" id="contact">
+  <div class="orb orb--warm cta__orb"></div>
+  <div class="container">
+    <p class="cta__tag t-caption reveal-up">Начать диалог</p>
+    <h2 class="cta__title t-display reveal-text">Создадим пространство вместе</h2>
+    <p class="cta__body t-body-lg reveal-up">Расскажите о вашем проекте — мы подберём решение, точное по форме, материалу и характеру</p>
+    <a href="#" class="cta__btn reveal-up">
+      <span>Обсудить проект</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <p class="footer__logo">Маэстро</p>
+        <p class="footer__tagline">Мебель как искусство формы и материала</p>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Навигация</p>
+        <ul class="footer__col-links">
+          <li><a href="#philosophy" class="footer__col-link">Философия</a></li>
+          <li><a href="#collections" class="footer__col-link">Коллекции</a></li>
+          <li><a href="#materials" class="footer__col-link">Материалы</a></li>
+          <li><a href="#featured" class="footer__col-link">Объекты</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-title">Контакт</p>
+        <ul class="footer__col-links">
+          <li><a href="#" class="footer__col-link">Москва, Патриаршие</a></li>
+          <li><a href="#" class="footer__col-link">+7 495 000 00 00</a></li>
+          <li><a href="#" class="footer__col-link">studio@maestro.ru</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2025 Маэстро. Все права защищены</p>
+      <a href="#" class="footer__back-top" aria-label="Наверх">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <span>Наверх</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  document.querySelector('.footer__back-top')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---- Character split (lightweight SplitText alternative) ---- */
+  function splitChars(selector) {
+    const elements = document.querySelectorAll(selector);
+    const allChars = [];
+    elements.forEach(el => {
+      const text = el.textContent;
+      el.textContent = '';
+      el.setAttribute('aria-label', text);
+      [...text].forEach(ch => {
+        const span = document.createElement('span');
+        span.className = 'hero__char';
+        span.textContent = ch;
+        if (ch === ' ') span.innerHTML = '&nbsp;';
+        span.setAttribute('aria-hidden', 'true');
+        el.appendChild(span);
+        allChars.push(span);
+      });
+    });
+    return allChars;
+  }
+
+  const heroChars = splitChars('[data-char-split]');
+
+  /* ---- Year counter animation ---- */
+  function animateCounter(el, tl, position) {
+    const target = parseInt(el.dataset.target, 10);
+    const start = parseInt(el.dataset.start || '0', 10);
+    const proxy = { val: start };
+    tl.to(proxy, {
+      val: target,
+      duration: 4.5,
+      ease: 'power2.out',
+      onUpdate() {
+        el.textContent = String(Math.round(proxy.val)).padStart(4, '0');
+      }
+    }, position);
+  }
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.reveal-text, .reveal-up, .reveal-fade, .reveal-mask, .hero__tag, .hero__subtitle').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.clipPath = 'none';
+    });
+    heroChars.forEach(ch => { ch.style.opacity = '1'; ch.style.transform = 'none'; });
+    document.querySelector('.hero__line').style.transform = 'scaleX(1)';
+    const glass = document.querySelector('.hero__visual-glass');
+    if (glass) { glass.style.opacity = '1'; glass.style.transform = 'none'; }
+    const counter = document.querySelector('.hero__counter');
+    if (counter) counter.textContent = counter.dataset.target;
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---- Set initial clip-path on panels ---- */
+  gsap.set('.hero__panel-left', { clipPath: 'inset(0 100% 0 0)' });
+  gsap.set('.hero__panel-right', { clipPath: 'inset(100% 0 0 0)', opacity: 0 });
+  gsap.set('.hero__bg', { scale: 1.05 });
+
+  /* ---- HERO CINEMATIC TIMELINE ---- */
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+
+  heroTl
+    .to('.hero__panel-left', {
+      clipPath: 'inset(0 0 0 0)',
+      duration: 1.4
+    }, 0)
+    .to('.hero__panel-right', {
+      clipPath: 'inset(0 0 0 0)',
+      opacity: 1,
+      duration: 1.4
+    }, 0)
+    .to('.hero__bg', {
+      scale: 1,
+      duration: 2,
+      ease: 'power2.out'
+    }, 0.3)
+    .to('.hero__tag', {
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0.6)
+    .fromTo(heroChars, {
+      opacity: 0,
+      y: '120%',
+      rotateZ: 5
+    }, {
+      opacity: 1,
+      y: '0%',
+      rotateZ: 0,
+      stagger: 0.025,
+      duration: 1.2,
+      ease: 'power4.out'
+    }, 0.6)
+    .to('.hero__line', {
+      scaleX: 1,
+      duration: 0.8,
+      ease: 'power2.inOut'
+    }, 1.8)
+    .fromTo('.hero__subtitle', {
+      opacity: 0,
+      y: 30
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power3.out'
+    }, 1.6)
+    .to('.hero__visual-glass', {
+      opacity: 1,
+      y: '0%',
+      duration: 0.8,
+      ease: 'power3.out'
+    }, 2.2);
+
+  const counterEl = document.querySelector('.hero__counter');
+  if (counterEl) animateCounter(counterEl, heroTl, 2.4);
+
+  heroTl.call(() => {
+    document.querySelector('.hero__panel-left').style.willChange = 'auto';
+    document.querySelector('.hero__panel-right').style.willChange = 'auto';
+    document.querySelector('.hero__bg').style.willChange = 'auto';
+    heroChars.forEach(ch => ch.style.willChange = 'auto');
+  });
+
+  /* ---- Hero parallax on scroll ---- */
+  gsap.to('.hero__visual-inner', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  });
+
+  gsap.to('.hero__light', {
+    yPercent: 20,
+    xPercent: 8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
+  });
+
+  /* ---- Orb parallax ---- */
+  gsap.utils.toArray('.orb').forEach((orb, i) => {
+    gsap.to(orb, {
+      yPercent: -20 + (i * 8),
+      xPercent: (i % 2 === 0 ? 5 : -5),
+      ease: 'none',
+      scrollTrigger: { trigger: orb.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+    });
+  });
+
+  /* ---- Reveal: clip-path text ---- */
+  gsap.utils.toArray('.reveal-text').forEach(el => {
+    gsap.to(el, {
+      clipPath: 'inset(0% 0 0 0)',
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+
+  /* ---- Reveal: translate up ---- */
+  gsap.utils.toArray('.reveal-up').forEach(el => {
+    gsap.fromTo(el, {
+      opacity: 0,
+      y: 30
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+    });
+  });
+
+  /* ---- Reveal: mask ---- */
+  gsap.utils.toArray('.reveal-mask').forEach(el => {
+    gsap.to(el, {
+      clipPath: 'inset(0 0% 0 0)',
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.inOut',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+
+  /* ---- Staggered collection cards ---- */
+  gsap.utils.toArray('.collections__grid').forEach(grid => {
+    gsap.to(grid.querySelectorAll('.collection-card'), {
+      opacity: 1, y: 0,
+      stagger: 0.15, duration: 0.9, ease: 'power2.out',
+      scrollTrigger: { trigger: grid, start: 'top 80%', once: true }
+    });
+  });
+
+  /* ---- Material items stagger ---- */
+  gsap.utils.toArray('.materials__list').forEach(list => {
+    gsap.to(list.querySelectorAll('.material-item'), {
+      opacity: 1, y: 0,
+      stagger: 0.1, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: list, start: 'top 85%', once: true }
+    });
+  });
+
+  /* ---- Showroom parallax ---- */
+  gsap.to('.showroom__content', {
+    yPercent: -12,
+    ease: 'none',
+    scrollTrigger: { trigger: '.showroom', start: 'top bottom', end: 'bottom top', scrub: 1 }
+  });
+
+  /* ---- Space visuals offset parallax ---- */
+  gsap.to('.space__visual:first-child', {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.space', start: 'top bottom', end: 'bottom top', scrub: 1 }
+  });
+
+  gsap.to('.space__visual:last-child', {
+    yPercent: 8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.space', start: 'top bottom', end: 'bottom top', scrub: 1 }
+  });
+
+});
+</script>
+
+</body>
+</html>
