@@ -1637,13 +1637,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .nav__tagline { display: none; }
   .nav__hamburger { display: block; }
 
-  /* Global text overflow prevention */
+  /* Overflow safety net — no aggressive word-break */
   .t-display,
   .t-heading {
-    word-break: break-word;
     overflow-wrap: break-word;
-    hyphens: auto;
   }
+
+  .hero__tag { display: none; }
 
   .hero {
     flex-direction: column;
@@ -1652,7 +1652,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 
   .hero__panel-left {
-    padding: 6rem var(--gutter) 2rem;
+    padding: 5.5rem var(--gutter) 1.5rem;
     text-align: left;
     z-index: var(--z-content);
   }
@@ -1660,19 +1660,20 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .hero__content { max-width: 100%; }
 
   .hero__title {
-    font-size: clamp(2rem, 10vw, 3.5rem);
-    line-height: 1;
+    font-size: clamp(1.85rem, 8.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: 0.06em;
   }
 
   .hero__word {
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    white-space: nowrap;
   }
 
   .t-serif-italic {
     margin-left: 0;
-    font-size: 1.1em;
+    font-size: 1.35em;
+    margin-top: 0.15em;
+    display: block;
   }
 
   .hero__panel-right {
@@ -1681,10 +1682,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     left: auto !important;
     right: auto !important;
     width: calc(100% - var(--gutter) * 2) !important;
-    aspect-ratio: 3/4 !important;
+    aspect-ratio: 4/3 !important;
     height: auto !important;
-    max-height: 55vh !important;
-    margin: 0 auto 3rem !important;
+    max-height: 45vh !important;
+    margin: 0 auto 2rem !important;
     border-radius: 16px !important;
     border: 1px solid var(--glass-border-subtle) !important;
     z-index: 3 !important;
@@ -1694,10 +1695,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .hero__subtitle {
     margin-left: 0;
     margin-right: 0;
-    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 32ch;
+    color: var(--color-text-soft);
   }
 
-  .hero__line { margin-left: 0; margin-right: auto; }
+  .hero__line {
+    margin: 1rem 0;
+    margin-right: auto;
+  }
 
   /* Philosophy */
   .philosophy__inner {
