@@ -133,20 +133,24 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
    ============================================ */
 .t-display {
   font-family: var(--font-sans);
+  font-size: var(--fs-section);
   font-weight: 400;
   line-height: var(--lh-tight);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.15em 0;
+  overflow-wrap: break-word;
 }
 
 .t-heading {
   font-family: var(--font-sans);
+  font-size: var(--fs-section);
   font-weight: 400;
   line-height: var(--lh-heading);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.15em 0;
+  overflow-wrap: break-word;
 }
 
 .t-serif-italic {
@@ -258,12 +262,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .nav.is-scrolled {
-  padding: 0.8rem clamp(2.5rem, 5vw, 5rem);
-  background: rgba(250, 247, 242, 0.6);
-  backdrop-filter: blur(30px) saturate(160%);
-  -webkit-backdrop-filter: blur(30px) saturate(160%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 1px 24px rgba(42, 36, 32, 0.05);
+  padding: 1rem clamp(2.5rem, 5vw, 5rem);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 40px rgba(42, 36, 32, 0.06);
 }
 
 .nav__brand {
@@ -1377,8 +1381,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .showroom__tag { margin-bottom: var(--space-md); }
 
 .showroom__title {
-  font-size: var(--fs-section);
-  font-weight: 400;
   margin-bottom: var(--space-md);
   color: var(--color-text-deep);
 }
@@ -1473,8 +1475,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .space__tag { margin-bottom: var(--space-md); }
 
 .space__title {
-  font-size: var(--fs-section);
-  font-weight: 500;
   margin-bottom: var(--space-md);
   max-width: 14ch;
   color: var(--color-text-deep);
@@ -1505,8 +1505,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .cta__tag { margin-bottom: var(--space-md); }
 
 .cta__title {
-  font-size: clamp(2.8rem, 6vw, 6rem);
-  font-weight: 400;
   margin-bottom: var(--space-md);
   max-width: 18ch;
   margin-left: auto;
@@ -1772,6 +1770,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
   /* ── Navigation ── */
   .nav { padding: 1.1rem var(--gutter); }
+  .nav.is-scrolled { padding: 0.8rem var(--gutter); }
   .nav__links { display: none; }
   .nav__tagline { display: none; }
   .nav__hamburger { display: block; }
@@ -1847,7 +1846,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .philosophy__quote {
     max-width: 100%;
     margin-bottom: var(--space-md);
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
   }
   .philosophy__body { max-width: 100%; }
   .philosophy__visual { aspect-ratio: 4/3; }
@@ -1867,9 +1865,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     gap: var(--space-md);
   }
   .collection-card { aspect-ratio: 4/3; }
-  .collections__title {
-    font-size: clamp(1.75rem, 7vw, 2.5rem);
-  }
   .collection-card__name {
     font-size: 1.15rem;
   }
@@ -1885,7 +1880,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .materials__title {
     max-width: 100%;
     margin-bottom: var(--space-md);
-    font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
   .materials__right {
     margin-top: var(--space-md);
@@ -1910,9 +1904,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   /* ── Featured Pieces ── */
   .featured__header {
     margin-bottom: clamp(2rem, 4vh, 3rem);
-  }
-  .featured__title {
-    font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
   .piece {
     grid-template-columns: 1fr;
@@ -1949,9 +1940,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     border-radius: 16px;
     padding: clamp(2rem, 5vw, 3rem);
   }
-  .showroom__title {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
-  }
 
   /* ── Space ── */
   .space__inner {
@@ -1979,18 +1967,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .space__visual:last-child {
     aspect-ratio: 4/3;
   }
-  .space__title {
-    max-width: 100%;
-    font-size: clamp(1.75rem, 7vw, 2.5rem);
-  }
 
   /* ── CTA ── */
   .cta {
     padding: clamp(5rem, 12vh, 8rem) 0;
-  }
-  .cta__title {
-    font-size: clamp(1.75rem, 7vw, 3rem);
-    max-width: 100%;
   }
   .cta__body {
     max-width: 36ch;
