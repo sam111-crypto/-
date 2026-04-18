@@ -85,6 +85,15 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-text-deep);
+  outline-offset: 4px;
+}
+
+section[id] {
+  scroll-margin-top: 100px;
+}
+
 body {
   font-family: var(--font-sans);
   font-weight: 300;
@@ -640,7 +649,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   border: 1px solid rgba(42, 36, 32, 0.15);
   opacity: 0;
   transform: translateY(16px);
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .hero__cta::before {
@@ -1182,7 +1191,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   border-radius: 100px;
   background: rgba(42, 36, 32, 0.06);
   border: 1px solid rgba(42, 36, 32, 0.1);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .piece__link::before {
@@ -1192,7 +1201,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   background: var(--color-text-deep);
   border-radius: 100%;
   transform: translateY(110%);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
 
@@ -1429,7 +1438,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cta__btn::before {
@@ -1439,7 +1448,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   background: var(--color-text-deep);
   border-radius: 100%;
   transform: translateY(110%);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
 }
 
@@ -1948,7 +1957,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
       <p class="hero__subtitle">Для частных и коммерческих интерьеров. От&nbsp;идеи и&nbsp;материалов до&nbsp;точного исполнения в&nbsp;цехе.</p>
       <a href="#contact" class="hero__cta">
         <span>Обсудить проект</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </div>
@@ -1992,7 +2001,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <p class="collection-card__desc">Минимальная форма, максимальная выразительность</p>
         </div>
         <div class="collection-card__arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
       </div>
       <div class="collection-card reveal-up">
@@ -2003,7 +2012,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <p class="collection-card__desc">Структура как эстетическое высказывание</p>
         </div>
         <div class="collection-card__arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
       </div>
       <div class="collection-card reveal-up">
@@ -2014,7 +2023,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <p class="collection-card__desc">Органика формы, честность материала</p>
         </div>
         <div class="collection-card__arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
       </div>
     </div>
@@ -2082,7 +2091,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <p class="piece__desc reveal-up">Форма, рождённая из жеста отдыха. Дуб, лён, ручная сборка. Объект, задающий тон всему пространству</p>
           <a href="#" class="piece__link reveal-up">
             <span>Подробнее</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
       </article>
@@ -2096,7 +2105,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <p class="piece__desc reveal-up">Геометрия чистого объёма. Травертин и чернёная сталь. Обеденный стол как архитектурный акцент</p>
           <a href="#" class="piece__link reveal-up">
             <span>Подробнее</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
       </article>
@@ -2147,7 +2156,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     <p class="cta__body t-body-lg reveal-up">Расскажите о вашем проекте — мы подберём решение, точное по форме, материалу и характеру</p>
     <a href="#" class="cta__btn reveal-up">
       <span>Обсудить проект</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
 </section>
@@ -2181,7 +2190,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     <div class="footer__bottom">
       <p class="footer__copy">&copy; 2025 Маэстро. Все права защищены</p>
       <a href="#" class="footer__back-top" aria-label="Наверх">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
         <span>Наверх</span>
       </a>
     </div>
