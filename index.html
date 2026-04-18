@@ -23,7 +23,6 @@
   --color-text-soft:   #8A7E6E;
   --color-text:        #3A342C;
   --color-text-deep:   #2A2420;
-  --color-accent:      #3A4A33;
 
   --glass-bg:          rgba(250, 247, 242, 0.45);
   --glass-bg-strong:   rgba(250, 247, 242, 0.6);
@@ -162,13 +161,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-size: 1.15em;
   line-height: 1;
   letter-spacing: 0.02em;
-  color: var(--color-accent);
+  color: var(--color-text-deep);
   vertical-align: baseline;
-  text-shadow: 
-    0 -1px 1px rgba(255, 255, 255, 0.5), 
-    0 1px 1px rgba(0, 0, 0, 0.2), 
-    0 2px 4px rgba(0, 0, 0, 0.15), 
-    0 8px 16px rgba(58, 74, 51, 0.25);
 }
 
 .t-caption {
@@ -617,7 +611,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.16em;
-  fill: var(--color-accent);
+  fill: var(--color-text-deep);
   text-transform: uppercase;
 }
 
@@ -652,15 +646,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-size: 1.15em;
   line-height: 1;
   letter-spacing: 0.02em;
-  color: var(--color-accent);
+  color: var(--color-text-deep);
   margin-top: 0.1em;
   vertical-align: baseline;
   position: relative;
   text-shadow: 
-    0 -2px 2px rgba(255, 255, 255, 0.5), 
-    0 1px 2px rgba(0, 0, 0, 0.3), 
-    0 4px 8px rgba(0, 0, 0, 0.2), 
-    0 16px 32px rgba(58, 74, 51, 0.35);
+    0px 1px 1px rgba(255, 255, 255, 0.3), 
+    0px 4px 12px rgba(42, 36, 32, 0.15);
 }
 
 .hero__char {
@@ -921,20 +913,23 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .collection-card:nth-child(1) .collection-card__bg {
   background:
-    radial-gradient(ellipse at 40% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(250, 247, 242, 0.1) 100%);
+    radial-gradient(ellipse at 40% 30%, rgba(212,200,184,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(168,155,140,0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #D4C8B8 0%, #C4B5A2 30%, #E8DDD0 60%, #C4B8A8 100%);
 }
 
 .collection-card:nth-child(2) .collection-card__bg {
   background:
-    radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.2) 0%, rgba(250, 247, 242, 0.05) 100%);
+    radial-gradient(ellipse at 50% 40%, rgba(191,181,165,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 80%, rgba(176,165,149,0.3) 0%, transparent 50%),
+    linear-gradient(160deg, #BFB5A5 0%, #AFA598 30%, #DDD5C8 60%, #B0A595 100%);
 }
 
 .collection-card:nth-child(3) .collection-card__bg {
   background:
-    radial-gradient(ellipse at 60% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.25) 0%, rgba(250, 247, 242, 0.1) 100%);
+    radial-gradient(ellipse at 60% 30%, rgba(200,192,178,0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 70%, rgba(174,166,152,0.3) 0%, transparent 50%),
+    linear-gradient(145deg, #C8C0B2 0%, #B8AFA0 30%, #E2DAD0 60%, #AEA698 100%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1226,14 +1221,16 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .piece:nth-child(1) .piece__visual-inner {
   background:
-    radial-gradient(ellipse at 45% 45%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
-    linear-gradient(140deg, rgba(255, 255, 255, 0.3) 0%, rgba(250, 247, 242, 0.1) 100%);
+    radial-gradient(ellipse at 45% 45%, rgba(196,184,168,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(168,155,140,0.3) 0%, transparent 50%),
+    linear-gradient(140deg, var(--color-bg-accent) 0%, var(--color-neutral) 40%, var(--color-muted) 70%, var(--color-surface) 100%);
 }
 
 .piece:nth-child(2) .piece__visual-inner {
   background:
-    radial-gradient(ellipse at 40% 55%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.2) 0%, rgba(250, 247, 242, 0.05) 100%);
+    radial-gradient(ellipse at 40% 55%, rgba(180,168,152,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 65% 30%, rgba(196,184,168,0.3) 0%, transparent 50%),
+    linear-gradient(160deg, var(--color-surface) 0%, var(--color-bg-accent) 40%, var(--color-neutral) 70%, var(--color-muted) 100%);
 }
 
 .piece__visual-inner::after {
@@ -1458,14 +1455,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .space__visual:nth-child(1) .space__visual-inner {
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
-    linear-gradient(155deg, rgba(255, 255, 255, 0.3) 0%, rgba(250, 247, 242, 0.1) 100%);
+    radial-gradient(ellipse at 50% 50%, rgba(196,184,168,0.4) 0%, transparent 60%),
+    linear-gradient(155deg, var(--color-surface) 0%, var(--color-bg-accent) 40%, var(--color-neutral) 80%, var(--color-muted) 100%);
 }
 
 .space__visual:nth-child(2) .space__visual-inner {
   background:
-    radial-gradient(ellipse at 40% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 60%),
-    linear-gradient(170deg, rgba(255, 255, 255, 0.2) 0%, rgba(250, 247, 242, 0.05) 100%);
+    radial-gradient(ellipse at 40% 50%, rgba(212,200,184,0.4) 0%, transparent 60%),
+    linear-gradient(170deg, var(--color-bg-accent) 0%, var(--color-surface) 40%, var(--color-bg-alt) 80%, var(--color-neutral) 100%);
 }
 
 .space__visual-inner::after {
