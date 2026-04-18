@@ -436,16 +436,22 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   overflow: hidden;
 }
 
-.hero__video video {
+.hero__vid {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
   opacity: 0;
-  transition: opacity 1.6s var(--ease-out);
+  transition: opacity 1.8s var(--ease-out);
 }
 
-.hero__video video.is-loaded {
+.hero__vid.is-loaded {
+  opacity: 0;
+}
+
+.hero__vid--active.is-loaded {
   opacity: 1;
 }
 
@@ -1608,7 +1614,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .hero__tag, .hero__subtitle, .hero__cta { opacity: 1; transform: none; }
   .hero__char { opacity: 1; transform: none; }
   .hero__line { transform: scaleX(1); }
-  .hero__video video { opacity: 1; }
+  .hero__vid { opacity: 1; }
 }
 
 @media (max-width: 768px) {
@@ -1912,8 +1918,17 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 <!-- ========== HERO ========== -->
 <section class="hero" aria-label="Главный экран">
   <div class="hero__video">
-    <video autoplay muted loop playsinline disablepictureinpicture poster="assets/hero-poster.png" aria-hidden="true">
+    <video class="hero__vid hero__vid--active" autoplay muted playsinline disablepictureinpicture poster="assets/hero-poster.png" aria-hidden="true">
       <source src="assets/hero-bg.mp4" type="video/mp4">
+    </video>
+    <video class="hero__vid" muted playsinline disablepictureinpicture preload="auto" aria-hidden="true">
+      <source src="assets/hero-bg-2.mp4" type="video/mp4">
+    </video>
+    <video class="hero__vid" muted playsinline disablepictureinpicture preload="auto" aria-hidden="true">
+      <source src="assets/hero-bg-3.mp4" type="video/mp4">
+    </video>
+    <video class="hero__vid" muted playsinline disablepictureinpicture preload="auto" aria-hidden="true">
+      <source src="assets/hero-bg-4.mp4" type="video/mp4">
     </video>
     <div class="hero__video-overlay"></div>
   </div>
@@ -2271,13 +2286,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }, position);
   }
 
-  /* ---- Video background fade-in ---- */
-  const heroVideo = document.querySelector('.hero__video video');
-  if (heroVideo) {
-    const showVideo = () => heroVideo.classList.add('is-loaded');
-    if (heroVideo.readyState >= 3) showVideo();
-    else heroVideo.addEventListener('canplay', showVideo, { once: true });
+  /* ---- Video carousel with crossfade ---- */
+  const heroVideos = document.querySelectorAll('.hero__vid');
+  let currentVideoIndex = 0;
+
+  heroVideos.forEach(vid => {
+    const show = () => vid.classList.add('is-loaded');
+    if (vid.readyState >= 3) show();
+    else vid.addEventListener('canplay', show, { once: true });
+  });
+
+  if (heroVideos.length > 1) {
+    heroVideos[0].play();
+
+    function crossfadeToNext() {
+      const current = heroVideos[currentVideoIndex];
+      const nextIndex = (currentVideoIndex + 1) % heroVideos.length;
+      const next = heroVideos[nextIndex];
+
+      next.currentTime = 0;
+      next.play();
+      next.classList.add('hero__vid--active');
+      current.classList.remove('hero__vid--active');
+
+      currentVideoIndex = nextIndex;
+    }
+
+    heroVideos.forEach(vid => {
+      vid.addEventListener('ended', crossfadeToNext);
+    });
   }
+
+  const heroVideo = heroVideos[0];
 
   if (prefersReducedMotion) {
     document.querySelectorAll('.reveal-text, .reveal-up, .reveal-fade, .reveal-mask, .hero__tag, .hero__subtitle, .hero__cta').forEach(el => {
@@ -2287,7 +2327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     heroChars.forEach(ch => { ch.style.opacity = '1'; ch.style.transform = 'none'; });
     document.querySelector('.hero__line').style.transform = 'scaleX(1)';
-    if (heroVideo) heroVideo.classList.add('is-loaded');
+    heroVideos.forEach(v => v.classList.add('is-loaded'));
     return;
   }
 
@@ -2350,7 +2390,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- Hero parallax on scroll ---- */
   if (heroVideo) {
-    gsap.to('.hero__video video', {
+    gsap.to('.hero__vid', {
       scale: 1.08,
       ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
