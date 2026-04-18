@@ -2107,6 +2107,40 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   text-decoration-color: var(--color-neutral);
 }
 
+.assistant-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: msgIn 0.3s var(--ease-out) 0.15s forwards;
+}
+
+.assistant-suggestion {
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--color-text-soft);
+  background: rgba(250, 247, 242, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border-subtle);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.assistant-suggestion:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-deep);
+  border-color: rgba(42, 36, 32, 0.12);
+}
+
 .assistant-typing {
   align-self: flex-start;
   display: flex;
@@ -3000,17 +3034,112 @@ document.addEventListener('DOMContentLoaded', () => {
   let conversationStarted = false;
 
   const responses = {
-    'коллекц': 'У нас три авторские линии. «Тишина» — минимальные формы с максимальной выразительностью. «Архитектон» — мебель как структурное высказывание. «Натура» — органика формы, честность материала. Каждая коллекция адаптируется под ваш интерьер.',
-    'материал': 'Мы работаем с массивом дуба трёхлетней выдержки, натуральным камнем — травертином и мрамором, матовым металлом — латунью и чернёной сталью, а также текстилем: льном, шерстью и кашемиром.',
-    'заказ': 'Процесс начинается с диалога: вы рассказываете о пространстве и задаче, мы предлагаем концепцию. Далее — согласование материалов, чертежи и изготовление в нашем цехе. Свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru.',
-    'срок': 'Сроки зависят от сложности: типовые решения — от 4 недель, индивидуальные проекты — от 8 до 12 недель. На каждом этапе вы видите прогресс.',
-    'цен': 'Стоимость рассчитывается индивидуально, исходя из материалов, размеров и сложности. Базовые предметы — от 180 000 ₽, сложные композиции — по запросу. Напишите нам для расчёта.',
-    'доставк': 'Мы доставляем по всей России. Москва и область — бесплатно при заказе от 300 000 ₽. Сборка и установка включены.',
-    'привет': 'Здравствуйте! Рад помочь. Спрашивайте о коллекциях, материалах, процессе заказа или сроках — расскажу подробно.',
-    'здравств': 'Добрый день! Чем могу помочь? Расскажу о наших коллекциях, материалах или процессе создания мебели.',
+    'коллекц': {
+      text: 'У нас три авторские линии. О какой из них рассказать подробнее?',
+      suggestions: ['Линия «Тишина»', 'Линия «Архитектон»', 'Линия «Натура»']
+    },
+    'тишин': {
+      text: 'Коллекция «Тишина» — это минимальные формы с максимальной выразительностью. Включает в себя кресла, диваны и низкие столики, создающие атмосферу абсолютного покоя.',
+      suggestions: ['Материалы «Тишины»', 'Сроки изготовления', 'Как заказать']
+    },
+    'архитектон': {
+      text: '«Архитектон» — это мебель как структурное высказывание. Обеденные столы и консоли с чистой геометрией, где камень встречается с металлом.',
+      suggestions: ['Материалы', 'Цены', 'Как заказать']
+    },
+    'натур': {
+      text: 'Коллекция «Натура» подчеркивает органику формы и честность материала. Мы сохраняем естественный край дерева (live edge) и природную фактуру льна.',
+      suggestions: ['Подробнее о материалах', 'Уход за мебелью']
+    },
+    'материал': {
+      text: 'Мы работаем с массивом дуба трёхлетней выдержки, натуральным камнем (травертин, мрамор), матовым металлом (латунь, чернёная сталь) и премиальным текстилем (лён, шерсть, кашемир).',
+      suggestions: ['Дерево', 'Камень', 'Текстиль']
+    },
+    'дерев': {
+      text: 'Мы используем массив дуба трёхлетней выдержки. Это гарантирует стабильность геометрии. Финиш — натуральное масло с твердым воском.',
+      suggestions: ['Уход за деревом', 'Коллекция «Натура»']
+    },
+    'камен': {
+      text: 'В наших объектах используется итальянский травертин и мрамор. Камень обрабатывается вручную до получения идеальной матовой поверхности (honed finish).',
+      suggestions: ['Уход за камнем', 'Коллекция «Архитектон»']
+    },
+    'текстил': {
+      text: 'Обивка мягкой мебели выполняется из бельгийского льна, итальянской шерсти и кашемира. Все ткани имеют высокую износостойкость (от 50 000 по Мартиндейлу).',
+      suggestions: ['Уход за текстилем', 'Линия «Тишина»']
+    },
+    'заказ': {
+      text: 'Процесс начинается с диалога: вы рассказываете о пространстве, мы предлагаем концепцию. Далее — согласование материалов, чертежи и изготовление в нашем цехе.',
+      suggestions: ['Сроки', 'Доставка', 'Контакты']
+    },
+    'срок': {
+      text: 'Сроки зависят от сложности: типовые решения (адаптация размеров) — от 4 недель, полностью индивидуальные проекты — от 8 до 12 недель.',
+      suggestions: ['Как заказать', 'Цены']
+    },
+    'цен': {
+      text: 'Стоимость рассчитывается индивидуально. Базовые предметы (например, кресла) — от 180 000 ₽, сложные композиции (обеденные столы из камня) — по запросу.',
+      suggestions: ['Обсудить проект', 'Как заказать']
+    },
+    'доставк': {
+      text: 'Мы доставляем по всей России. По Москве и области доставка, подъем и профессиональная сборка — бесплатно при заказе от 300 000 ₽.',
+      suggestions: ['Сроки', 'Оплата']
+    },
+    'сборк': {
+      text: 'Наши мастера сами привозят и собирают мебель, чтобы гарантировать идеальное примыкание всех деталей. Услуга бесплатна по Москве (при заказе от 300k).',
+      suggestions: ['Доставка', 'Гарантия']
+    },
+    'оплат': {
+      text: 'Работаем по договору. Стандартная схема: 50% предоплата перед запуском в производство, 50% перед отгрузкой.',
+      suggestions: ['Как заказать', 'Гарантия']
+    },
+    'гарант': {
+      text: 'На всю мебель МАЭСТРО предоставляется безусловная гарантия 5 лет. Мы также оказываем постгарантийное обслуживание и реставрацию.',
+      suggestions: ['Уход за мебелью', 'Контакты']
+    },
+    'качеств': {
+      text: 'Каждый предмет проходит 3 этапа контроля качества: на стадии подбора слэбов/слэбов камня, после столярной обработки и перед финальной упаковкой.',
+      suggestions: ['Гарантия', 'Материалы']
+    },
+    'уход': {
+      text: 'Дерево требует обновления масла раз в 2-3 года. Камень следует беречь от кислот. Текстиль подлежит профессиональной химчистке. Мы предоставляем подробную инструкцию к каждому предмету.',
+      suggestions: ['Гарантия', 'Материалы']
+    },
+    'дизайн': {
+      text: 'Наши архитекторы могут разработать мебель специально под ваш проект. Мы интегрируем объекты в вашу архитектурную среду.',
+      suggestions: ['Обсудить проект', 'Коллекции']
+    },
+    'проект': {
+      text: 'Если у вас есть готовый дизайн-проект, пришлите его нам на почту studio@maestro.ru. Мы сделаем расчет и предложим варианты адаптации наших предметов.',
+      suggestions: ['Контакты', 'Сроки']
+    },
+    'контакт': {
+      text: 'Мы на связи каждый день с 10:00 до 20:00.\nТелефон: +7 495 000 00 00\nEmail: studio@maestro.ru',
+      suggestions: ['Где посмотреть', 'Как заказать']
+    },
+    'адрес': {
+      text: 'Наше студия-пространство находится по адресу: г. Москва, район Патриарших прудов (визиты по предварительной записи).',
+      suggestions: ['Контакты', 'Обсудить проект']
+    },
+    'где': {
+      text: 'Наше студия-пространство находится по адресу: г. Москва, район Патриарших прудов (визиты по предварительной записи).',
+      suggestions: ['Контакты', 'Обсудить проект']
+    },
+    'обсуд': {
+      text: 'Будем рады обсудить вашу задачу! Оставьте заявку по телефону +7 495 000 00 00 или напишите на studio@maestro.ru.',
+      suggestions: ['Где посмотреть', 'Коллекции']
+    },
+    'привет': {
+      text: 'Здравствуйте! Я ИИ-консультант бренда МАЭСТРО. Чем могу быть полезен сегодня?',
+      suggestions: ['Коллекции', 'Материалы', 'Процесс заказа']
+    },
+    'здравств': {
+      text: 'Добрый день! Рад приветствовать вас. Я помогу сориентироваться в наших коллекциях и отвечу на любые вопросы.',
+      suggestions: ['Коллекции', 'Материалы', 'Контакты']
+    }
   };
 
-  const fallback = 'Благодарю за вопрос. Для подробной консультации свяжитесь с нами: +7 495 000 00 00 или studio@maestro.ru. Мы с радостью всё обсудим.';
+  const fallback = {
+    text: 'Благодарю за вопрос. Для более точного ответа, пожалуйста, выберите одну из тем ниже, либо свяжитесь с нами напрямую: +7 495 000 00 00.',
+    suggestions: ['Коллекции', 'Материалы', 'Контакты']
+  };
 
   function findResponse(text) {
     const lower = text.toLowerCase();
@@ -3036,23 +3165,56 @@ document.addEventListener('DOMContentLoaded', () => {
     trigger.focus();
   }
 
-  function addMessage(text, type) {
+  function addMessage(response, type) {
     if (!conversationStarted && welcome) {
       welcome.remove();
       conversationStarted = true;
     }
 
+    const msgContainer = document.createElement('div');
+    msgContainer.style.display = 'flex';
+    msgContainer.style.flexDirection = 'column';
+    msgContainer.style.gap = '0.5rem';
+    msgContainer.style.alignSelf = type === 'ai' ? 'flex-start' : 'flex-end';
+    msgContainer.style.maxWidth = '85%';
+
     const msg = document.createElement('div');
     msg.className = 'assistant-msg assistant-msg--' + type;
+    // Overriding maxWidth since container handles it
+    msg.style.maxWidth = '100%';
 
     const span = document.createElement('span');
     span.className = 'assistant-msg__text';
-    span.textContent = text;
+    
+    // Support both string (old way/user messages) and object (new AI responses)
+    if (typeof response === 'string') {
+      span.textContent = response;
+    } else {
+      span.textContent = response.text;
+    }
+    
     msg.appendChild(span);
+    msgContainer.appendChild(msg);
 
-    messagesEl.appendChild(msg);
+    // If it's an AI response with suggestions, add them
+    if (type === 'ai' && typeof response === 'object' && response.suggestions && response.suggestions.length > 0) {
+      const suggestionsRow = document.createElement('div');
+      suggestionsRow.className = 'assistant-suggestions';
+      
+      response.suggestions.forEach(sugText => {
+        const btn = document.createElement('button');
+        btn.className = 'assistant-suggestion';
+        btn.textContent = sugText;
+        btn.addEventListener('click', () => sendMessage(sugText));
+        suggestionsRow.appendChild(btn);
+      });
+      
+      msgContainer.appendChild(suggestionsRow);
+    }
+
+    messagesEl.appendChild(msgContainer);
     messagesEl.scrollTop = messagesEl.scrollHeight;
-    return msg;
+    return msgContainer;
   }
 
   function showTyping() {
@@ -3066,6 +3228,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function sendMessage(text) {
     if (!text.trim()) return;
+    
+    // Disable any existing suggestion buttons to prevent double-clicking
+    const oldSuggestions = document.querySelectorAll('.assistant-suggestion');
+    oldSuggestions.forEach(btn => {
+      btn.style.opacity = '0.5';
+      btn.style.pointerEvents = 'none';
+    });
+
     addMessage(text, 'user');
     input.value = '';
 
