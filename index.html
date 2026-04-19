@@ -1950,6 +1950,93 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   line-height: 1;
 }
 
+.assistant-teaser {
+  position: fixed;
+  bottom: 6rem;
+  right: 2.4rem;
+  z-index: var(--z-overlay);
+  max-width: 280px;
+  background: rgba(250, 247, 242, 0.7);
+  backdrop-filter: blur(var(--glass-blur-strong));
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
+  border-radius: 16px 16px 4px 16px;
+  padding: 1rem 1.25rem 1rem 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.assistant-teaser:hover {
+  background: rgba(250, 247, 242, 0.85);
+  box-shadow: 0 20px 60px rgba(42, 36, 32, 0.15), 0 4px 20px rgba(42, 36, 32, 0.08);
+}
+
+.assistant-teaser.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.assistant-teaser__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.assistant-teaser__icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-deep);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  animation: floatTeaserIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatTeaserIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.assistant-teaser__text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--color-text-deep);
+}
+
+.assistant-teaser__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  border-radius: 50%;
+  transition: background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.assistant-teaser__close:hover {
+  background: rgba(42, 36, 32, 0.06);
+  color: var(--color-text-deep);
+}
+
+.assistant-teaser__close svg {
+  width: 12px;
+  height: 12px;
+}
+
 .assistant-panel {
   position: fixed;
   bottom: 2.4rem;
@@ -2656,6 +2743,18 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 </footer>
 
 <!-- ========== AI ASSISTANT ========== -->
+<div class="assistant-teaser" aria-hidden="true">
+  <button class="assistant-teaser__close" aria-label="Скрыть">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="assistant-teaser__content">
+    <svg class="assistant-teaser__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <span class="assistant-teaser__text"></span>
+  </div>
+</div>
+
 <button class="assistant-trigger" aria-label="Открыть ассистент" aria-expanded="false">
   <svg class="assistant-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
     <path d="M12 3c5.5 0 9 3.5 9 7s-3.5 7-9 7c-.7 0-1.4-.06-2.1-.18L6 19v-3.5C3.75 14.15 3 12.15 3 10c0-3.5 3.5-7 9-7z" stroke-linejoin="round"/>
@@ -3022,6 +3121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ====== AI ASSISTANT ====== */
 (function() {
   const trigger = document.querySelector('.assistant-trigger');
+  const teaser = document.querySelector('.assistant-teaser');
+  const teaserCloseBtn = document.querySelector('.assistant-teaser__close');
   const panel = document.querySelector('.assistant-panel');
   const closeBtn = document.querySelector('.assistant-header__close');
   const input = document.querySelector('.assistant-input');
@@ -3032,6 +3133,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isOpen = false;
   let conversationStarted = false;
+  let teaserTimeout;
+
+  const teasers = [
+    {
+      text: 'Для индивидуальных проектов у нас сейчас действуют особые условия комплектации.',
+      keyword: 'проект'
+    },
+    {
+      text: 'Наши архитекторы готовы бесплатно адаптировать предметы под ваш интерьер.',
+      keyword: 'дизайн'
+    },
+    {
+      text: 'Мы приготовили для вас персональную привилегию на заказ из новой коллекции.',
+      keyword: 'заказ'
+    }
+  ];
+
+  function showTeaser() {
+    if (isOpen || conversationStarted) return;
+    
+    const randomTeaser = teasers[Math.floor(Math.random() * teasers.length)];
+    const teaserTextEl = document.querySelector('.assistant-teaser__text');
+    teaserTextEl.textContent = randomTeaser.text;
+    
+    // Store the keyword for when they click the teaser
+    teaser.dataset.keyword = randomTeaser.keyword;
+    teaser.classList.add('is-visible');
+  }
+
+  function hideTeaser() {
+    teaser.classList.remove('is-visible');
+  }
+
+  // Trigger teaser after 8 seconds
+  teaserTimeout = setTimeout(showTeaser, 8000);
+
+  // Close teaser on X click
+  if (teaserCloseBtn) {
+    teaserCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent opening the chat
+      hideTeaser();
+    });
+  }
+
+  // Open chat and send teaser message if clicked
+  if (teaser) {
+    teaser.addEventListener('click', () => {
+      hideTeaser();
+      openPanel();
+      
+      const keyword = teaser.dataset.keyword || 'привет';
+      
+      // Small delay to let the panel open before sending the message
+      setTimeout(() => {
+        sendMessage(keyword, true);
+      }, 400);
+    });
+  }
 
   const responses = {
     'коллекц': {
@@ -3143,6 +3302,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function findResponse(text) {
     const lower = text.toLowerCase();
+    
+    // Exact phrase match checks first (for suggestions that might match multiple keywords)
+    if (lower === 'линия «тишина»' || lower === 'тишина') return responses['тишин'];
+    if (lower === 'линия «архитектон»' || lower === 'архитектон') return responses['архитектон'];
+    if (lower === 'линия «натура»' || lower === 'натура' || lower === 'коллекция «натура»') return responses['натур'];
+    if (lower === 'материалы «тишины»') return responses['материал'];
+    if (lower === 'уход за деревом') return responses['уход'];
+    if (lower === 'уход за камнем') return responses['уход'];
+    if (lower === 'уход за текстилем') return responses['уход'];
+    if (lower === 'уход за мебелью') return responses['уход'];
+    if (lower === 'подробнее о материалах') return responses['материал'];
+    if (lower === 'где посмотреть') return responses['адрес'];
+    if (lower === 'процесс заказа') return responses['заказ'];
+
+    // Fallback to substring search
     for (const [key, val] of Object.entries(responses)) {
       if (lower.includes(key)) return val;
     }
