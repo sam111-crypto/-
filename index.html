@@ -578,10 +578,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .hero__wheel {
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: clamp(120px, 15vw, 180px);
-  height: clamp(120px, 15vw, 180px);
+  top: -45%;
+  right: -2%;
+  width: clamp(80px, 9vw, 110px);
+  height: clamp(80px, 9vw, 110px);
   pointer-events: none;
   z-index: 20;
   opacity: 0; /* Animated in via GSAP or CSS */
@@ -2538,8 +2538,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         <div class="collection-card__bg"></div>
         <div class="collection-card__overlay"></div>
         <div class="collection-card__glass">
-          <h3 class="collection-card__name t-heading">Тишина</h3>
-          <p class="collection-card__desc">Минимальная форма, максимальная выразительность</p>
+          <h3 class="collection-card__name t-heading">Легкость</h3>
+          <p class="collection-card__desc">Простые формы и ничего лишнего для вашего отдыха</p>
         </div>
         <div class="collection-card__arrow">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -2549,8 +2549,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         <div class="collection-card__bg"></div>
         <div class="collection-card__overlay"></div>
         <div class="collection-card__glass">
-          <h3 class="collection-card__name t-heading">Архитектон</h3>
-          <p class="collection-card__desc">Структура как эстетическое высказывание</p>
+          <h3 class="collection-card__name t-heading">Характер</h3>
+          <p class="collection-card__desc">Выразительный дизайн, который становится центром интерьера</p>
         </div>
         <div class="collection-card__arrow">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -2560,8 +2560,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         <div class="collection-card__bg"></div>
         <div class="collection-card__overlay"></div>
         <div class="collection-card__glass">
-          <h3 class="collection-card__name t-heading">Натура</h3>
-          <p class="collection-card__desc">Органика формы, честность материала</p>
+          <h3 class="collection-card__name t-heading">Тепло</h3>
+          <p class="collection-card__desc">Натуральное дерево и фактуры, к которым хочется прикасаться</p>
         </div>
         <div class="collection-card__arrow">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -2627,7 +2627,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <div class="piece__visual-inner"></div>
         </div>
         <div class="piece__info">
-          <p class="piece__tag t-caption reveal-up">Коллекция «Тишина»</p>
+          <p class="piece__tag t-caption reveal-up">Коллекция «Легкость»</p>
           <h3 class="piece__name t-heading reveal-text">Кресло «Созерцание»</h3>
           <p class="piece__desc reveal-up">Форма, рождённая из жеста отдыха. Дуб, лён, ручная сборка. Объект, задающий тон всему пространству</p>
           <a href="#" class="piece__link reveal-up">
@@ -2641,7 +2641,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
           <div class="piece__visual-inner"></div>
         </div>
         <div class="piece__info">
-          <p class="piece__tag t-caption reveal-up">Коллекция «Архитектон»</p>
+          <p class="piece__tag t-caption reveal-up">Коллекция «Характер»</p>
           <h3 class="piece__name t-heading reveal-text">Стол «Горизонт»</h3>
           <p class="piece__desc reveal-up">Геометрия чистого объёма. Травертин и чернёная сталь. Обеденный стол как архитектурный акцент</p>
           <a href="#" class="piece__link reveal-up">
@@ -3195,18 +3195,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const responses = {
     'коллекц': {
       text: 'У нас три авторские линии. О какой из них рассказать подробнее?',
-      suggestions: ['Линия «Тишина»', 'Линия «Архитектон»', 'Линия «Натура»']
+      suggestions: ['Линия «Легкость»', 'Линия «Характер»', 'Линия «Тепло»']
     },
-    'тишин': {
-      text: 'Коллекция «Тишина» — это минимальные формы с максимальной выразительностью. Включает в себя кресла, диваны и низкие столики, создающие атмосферу абсолютного покоя.',
-      suggestions: ['Материалы «Тишины»', 'Сроки изготовления', 'Как заказать']
+    'легкост': {
+      text: 'Коллекция «Легкость» — это простые формы и ничего лишнего для вашего отдыха. Включает в себя кресла, диваны и низкие столики, создающие атмосферу абсолютного покоя.',
+      suggestions: ['Материалы «Легкости»', 'Сроки изготовления', 'Как заказать']
     },
-    'архитектон': {
-      text: '«Архитектон» — это мебель как структурное высказывание. Обеденные столы и консоли с чистой геометрией, где камень встречается с металлом.',
+    'характер': {
+      text: '«Характер» — это выразительный дизайн, который становится центром интерьера. Обеденные столы и консоли с чистой геометрией, где камень встречается с металлом.',
       suggestions: ['Материалы', 'Цены', 'Как заказать']
     },
-    'натур': {
-      text: 'Коллекция «Натура» подчеркивает органику формы и честность материала. Мы сохраняем естественный край дерева (live edge) и природную фактуру льна.',
+    'тепл': {
+      text: 'Коллекция «Тепло» подчеркивает органику формы и честность материала. Мы сохраняем естественный край дерева (live edge) и природную фактуру льна.',
       suggestions: ['Подробнее о материалах', 'Уход за мебелью']
     },
     'материал': {
@@ -3215,15 +3215,15 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'дерев': {
       text: 'Мы используем массив дуба трёхлетней выдержки. Это гарантирует стабильность геометрии. Финиш — натуральное масло с твердым воском.',
-      suggestions: ['Уход за деревом', 'Коллекция «Натура»']
+      suggestions: ['Уход за деревом', 'Коллекция «Тепло»']
     },
     'камен': {
       text: 'В наших объектах используется итальянский травертин и мрамор. Камень обрабатывается вручную до получения идеальной матовой поверхности (honed finish).',
-      suggestions: ['Уход за камнем', 'Коллекция «Архитектон»']
+      suggestions: ['Уход за камнем', 'Коллекция «Характер»']
     },
     'текстил': {
       text: 'Обивка мягкой мебели выполняется из бельгийского льна, итальянской шерсти и кашемира. Все ткани имеют высокую износостойкость (от 50 000 по Мартиндейлу).',
-      suggestions: ['Уход за текстилем', 'Линия «Тишина»']
+      suggestions: ['Уход за текстилем', 'Линия «Легкость»']
     },
     'заказ': {
       text: 'Процесс начинается с диалога: вы рассказываете о пространстве, мы предлагаем концепцию. Далее — согласование материалов, чертежи и изготовление в нашем цехе.',
@@ -3304,10 +3304,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const lower = text.toLowerCase();
     
     // Exact phrase match checks first (for suggestions that might match multiple keywords)
-    if (lower === 'линия «тишина»' || lower === 'тишина') return responses['тишин'];
-    if (lower === 'линия «архитектон»' || lower === 'архитектон') return responses['архитектон'];
-    if (lower === 'линия «натура»' || lower === 'натура' || lower === 'коллекция «натура»') return responses['натур'];
-    if (lower === 'материалы «тишины»') return responses['материал'];
+    if (lower === 'линия «легкость»' || lower === 'легкость') return responses['легкост'];
+    if (lower === 'линия «характер»' || lower === 'характер') return responses['характер'];
+    if (lower === 'линия «тепло»' || lower === 'тепло' || lower === 'коллекция «тепло»') return responses['тепл'];
+    if (lower === 'материалы «легкости»') return responses['материал'];
     if (lower === 'уход за деревом') return responses['уход'];
     if (lower === 'уход за камнем') return responses['уход'];
     if (lower === 'уход за текстилем') return responses['уход'];
