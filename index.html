@@ -689,6 +689,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   margin-right: -0.08em;
 }
 
+.hero__word-group {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .hero__line {
   width: 64px;
   height: 1px;
@@ -1865,9 +1870,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 
   .hero__title {
-    font-size: clamp(2.1rem, 11vw, 3.6rem);
+    font-size: clamp(1.95rem, 10.2vw, 3.35rem);
     line-height: 1.02;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
   }
 
   .hero__word {
@@ -2113,7 +2118,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 
   .hero__title {
-    font-size: clamp(1.95rem, 12vw, 2.75rem);
+    font-size: clamp(1.72rem, 9.4vw, 2.35rem);
+    letter-spacing: 0.025em;
   }
 
   .hero__subtitle {
@@ -3106,14 +3112,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = el.textContent;
       el.textContent = '';
       el.setAttribute('aria-label', text);
-      [...text].forEach(ch => {
-        const span = document.createElement('span');
-        span.className = 'hero__char';
-        span.textContent = ch;
-        if (ch === ' ') span.innerHTML = '&nbsp;';
-        span.setAttribute('aria-hidden', 'true');
-        el.appendChild(span);
-        allChars.push(span);
+      text.split(/(\s+)/).forEach(token => {
+        if (!token) return;
+
+        if (/^\s+$/.test(token)) {
+          el.appendChild(document.createTextNode(token));
+          return;
+        }
+
+        const word = document.createElement('span');
+        word.className = 'hero__word-group';
+        word.setAttribute('aria-hidden', 'true');
+
+        [...token].forEach(ch => {
+          const span = document.createElement('span');
+          span.className = 'hero__char';
+          span.textContent = ch;
+          span.setAttribute('aria-hidden', 'true');
+          word.appendChild(span);
+          allChars.push(span);
+        });
+
+        el.appendChild(word);
       });
     });
     return allChars;
