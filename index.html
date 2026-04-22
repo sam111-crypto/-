@@ -1829,7 +1829,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     letter-spacing: 0.15em;
   }
 
-  .nav { padding: 1rem var(--gutter); }
+  .nav {
+    z-index: calc(var(--z-overlay) + 2);
+    padding: 1rem var(--gutter);
+  }
   .nav.is-scrolled { padding: 0.8rem var(--gutter); }
   .nav__logo {
     font-size: 1.02rem;
@@ -1982,7 +1985,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   }
 
   .featured__header {
-    margin-bottom: clamp(2rem, 4vh, 3rem);
+    margin-bottom: clamp(3rem, 8vw, 4.25rem);
   }
 
   .piece {
@@ -2019,47 +2022,9 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     justify-content: center;
   }
 
-  .showroom {
-    min-height: auto;
-    padding: var(--space-section) 0;
-  }
-
-  .showroom__content {
-    margin: 0 var(--gutter);
-    border-radius: 16px;
-    padding: clamp(2rem, 5vw, 3rem);
-  }
-
-  .showroom__title br {
+  .showroom,
+  .space {
     display: none;
-  }
-
-  .space__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  .space__visuals {
-    order: -1;
-    grid-column: 1 / -1;
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
-
-  .space__text {
-    grid-column: 1 / -1;
-    padding: clamp(1.5rem, 4vw, 2rem);
-    margin: -1.5rem 0.75rem 0;
-    border-radius: 12px;
-  }
-
-  .space__visual:first-child {
-    margin-top: 0;
-    aspect-ratio: 4 / 3;
-  }
-
-  .space__visual:last-child {
-    aspect-ratio: 4 / 3;
   }
 
   .cta {
